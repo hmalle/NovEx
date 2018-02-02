@@ -18,10 +18,9 @@ $(document).ready(function() {
   	database.ref().on("child_added", function(childSnapshot){
   		var dataName = childSnapshot.val().name;
   		var dataLoc = childSnapshot.val().location;
-  		var dataProf = childSnapshot.val().profession;
+  		var dataTrade = childSnapshot.val().trade;
   		var dataImg = childSnapshot.val().image;
   		var dataBio = childSnapshot.val().bio;
-  		var dataHours  = childSnapshot.val().hours;
   		var dataContact = childSnapshot.val().contact;
   		
   		$("").append();
@@ -33,32 +32,29 @@ $(document).ready(function() {
   		// Prevents the page from reloading on click
   		event.preventDefault();
 
-  		var expertName = $(/*an ID*/).val().trim();
-  		var expertLoc = $(/*an ID*/).val().trim();
-  		var expertProfession = $(/*an ID*/).val().trim();
-  		var expertImg = $(/*an ID*/).val().trim();
-  		var expertBio = $(/*an ID*/).val().trim();
-  		var expertHours = $(/*an ID*/).val().trim();
-  		var expertContact = $(/*an ID*/).val().trim();
+  		var expertName = $("#name").val().trim();
+  		var expertLoc = $("#location").val().trim();
+  		var expertTrade = $("#trade").val().trim();
+  		var expertImg = $("#image").val().trim();
+  		var expertBio = $("#bio").val().trim();
+  		var expertContact = $("#contact").val().trim();
 
   		database.ref().push({
   			name: expertName,
   			location: expertLoc,
-  			profession: expertProfession,
+  			trade: expertTrade,
   			image: expertImg,
   			bio: expertBio,
-  			hours: expertHours,
   			contact: expertContact
   		});
 
   		// Clear the form text boxes after submit
-  		$("#").val("");
-  		$("#").val("");
-  		$("#").val("");
-  		$("#").val("");
-  		$("#").val("");
-  		$("#").val("");
-  		$("#").val("");
+  		$("#name").val("");
+  		$("#location").val("");
+  		$("#trade").val("");
+  		$("#image").val("");
+  		$("#bio").val("");
+  		$("#contact").val("");
   	})
 
 });
