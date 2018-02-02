@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  var tempImage;
+
 	// Initialize Firebase
   	var config = {
     	apiKey: "AIzaSyCXKNHRqS-OvGJ7ClQvWaJyf62CNlzzxkE",
@@ -15,7 +17,8 @@ $(document).ready(function() {
 
   	// This function will be called any time a new profile is added to our database.
   	// We will do our jQuery call here to append profile divs (or cards if we are using bootstrap) to our html
-  	database.ref().on("child_added", function(childSnapshot){
+    // index.html
+  	database.ref().orderByChild("dateAdded").limitToLast(5).once("value", function(childSnapshot){
   		var dataName = childSnapshot.val().name;
   		var dataLoc = childSnapshot.val().location;
   		var dataTrade = childSnapshot.val().trade;
@@ -23,19 +26,29 @@ $(document).ready(function() {
   		var dataBio = childSnapshot.val().bio;
   		var dataContact = childSnapshot.val().contact;
   		
-  		$("").append();
+  		$("#profiles").append();
   	});
+
+    // This function will be called when the add-image button is clicked
+    // Takes an image from the user and saves it as a value
+    // profile.html
+    $("#add-image").on("click", function(openDialog){
+      openDialog.preventDefault();
+      tempImage = $("#fileid").click();
+      console.log(tempImage);
+    })
 
   	// This function will be called every time the submit button is clicked on the create profile form
   	// Pushes the expert's newly created profile information to the database
-  	$("#submitBtn").on("click", function(event){
+    // profile.html
+  	$("#add-profile").on("click", function(event){
   		// Prevents the page from reloading on click
   		event.preventDefault();
 
   		var expertName = $("#name").val().trim();
   		var expertLoc = $("#location").val().trim();
-  		var expertTrade = $("#trade").val().trim();
-  		var expertImg = $("#image").val().trim();
+  		var expertTrade = $("#trade").val();
+  		var expertImg = tempImage;
   		var expertBio = $("#bio").val().trim();
   		var expertContact = $("#contact").val().trim();
 
@@ -45,8 +58,16 @@ $(document).ready(function() {
   			trade: expertTrade,
   			image: expertImg,
   			bio: expertBio,
-  			contact: expertContact
+  			contact: expertContact,
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
   		});
+
+      // This function will be called when the user clicks the search button
+      // Searches database for conditionals and appends profile cards to #profiles div
+      // index.html
+      $("#searchBtn").on("click", function(event) {
+
+      })
 
   		// Clear the form text boxes after submit
   		$("#name").val("");
