@@ -2,26 +2,37 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Bootstrap Portfolio</title>
+  <title>NovEx</title>
   <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body>
-  <div class="container container-fluid">
-    <!-- Jumbotron Title -->
-    <div class="jumbotron jumbotron-fluid">
+  <div class="container container-fluid everything">
+    <!--
+    <div class="jumbotron jumbotron-fluid" style="">
       <h1 class="text-center">NovEx</h1>
     </div>
+    -->
 
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Search</h3>
+    <div class="container container-fluid" id="header">
+      <nav class="navbar navbar-light bg-light justify-content-between">
+        <a class="navbar-brand">NovEx</a>
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </nav> 
+    </div> <!--end of header-->
+
+    <div class="row" id="searchBar">
+      <div class="col-lg-12" style="padding: 0px;">
+        <div class="card">
+          <div class="card-header">
+            Search
           </div>
-          <div class="panel-body">
+          <div class="card-body">
             <div class="novice">
               <p>Novice stuff: floats left </p>
               <button class="btn" id="search">Search By Trade & ZipCode</button>
@@ -37,34 +48,71 @@
     </div><!--end of row-->
 
     <div class="row">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Results</h3>
+      <div class="card">
+        <div class="card-header">
+          Results
         </div>
-        <div class="panel-body" id="results">
-          <div class="col-md-7" id="profiles">
-            <div class="panel panel-default">
-              <div class="panel-title"><h3>Maps</h3></div>
-                <p>Integer rutrum neque mi, ut ultricies nulla finibus eget. Nullam ipsum urna, dignissim quis lacinia faucibus, euismod id augue. Donec sagittis ac quam id rhoncus. Fusce fringilla consectetur tristique. Duis tincidunt libero eu porta interdum. Praesent a elementum mi, nec sollicitudin ex. Donec vel pulvinar diam. Mauris accumsan vitae ligula quis dignissim. Sed vel nibh ut libero malesuada commodo vitae sed nibh. Nullam ac urna tortor. Morbi gravida leo ut tortor semper suscipit. Integer quis velit pharetra, pulvinar velit id, fermentum odio. In eu porttitor erat.</p>
+        <div class="card-body" id="results">
+          <div class="col-md-7 float-left" id="profiles">
+            <div class="card">
+              <div class="card-header">
+                Profiles
               </div>
-            </div> <!-- end of panel-->
+              <div class="card-body">
+                <p>Integer rutrum neque mi, ut ultricies nulla finibus eget. Nullam ipsum urna, dignissim 
+                    quis lacinia faucibus, euismod id augue. Donec sagittis ac quam id rhoncus. Fusce 
+                    fringilla consectetur tristique. Duis tincidunt libero eu porta interdum. Praesent a 
+                    elementum mi, nec sollicitudin ex. Donec vel pulvinar diam. Mauris accumsan vitae ligula
+                    quis dignissim. Sed vel nibh ut libero malesuada commodo vitae sed nibh. Nullam ac urna 
+                    tortor. Morbi gravida leo ut tortor semper suscipit. Integer quis velit pharetra, 
+                    pulvinar velit id, fermentum odio. In eu porttitor erat.
+                </p>
+              </div>
+            </div> <!-- end of card-->
           </div> <!--end of profiles-->
 
-          <div class="col-md-5" id="sideSection">
+          <div class="col-md-5 float-right" id="sideSection">
             <!--google map section -->
             <div>
-              <div class="panel panel-default">
-                <div class="panel-title"><h3>Maps</h3></div>
-                <p>Integer rutrum neque mi, ut ultricies nulla finibus eget. Nullam ipsum urna, dignissim quis lacinia faucibus, euismod id augue. Donec sagittis ac quam id rhoncus. Fusce fringilla consectetur tristique. Duis tincidunt libero eu porta interdum. Praesent a elementum mi, nec sollicitudin ex. Donec vel pulvinar diam. Mauris accumsan vitae ligula quis dignissim. Sed vel nibh ut libero malesuada commodo vitae sed nibh. Nullam ac urna tortor. Morbi gravida leo ut tortor semper suscipit. Integer quis velit pharetra, pulvinar velit id, fermentum odio. In eu porttitor erat.</p>
-              </div> <!--end of panel-->
+              <div class="card">
+                <div class=card-header><h3>Maps</h3></div>
+                <div class="card-body" id="map">
+                  <p>Integer rutrum neque mi, ut ultricies nulla finibus eget. Nullam ipsum urna, dignissim 
+                    quis lacinia faucibus, euismod id augue. Donec sagittis ac quam id rhoncus. Fusce 
+                    fringilla consectetur tristique. Duis tincidunt libero eu porta interdum. Praesent a 
+                    elementum mi, nec sollicitudin ex. Donec vel pulvinar diam. Mauris accumsan vitae ligula
+                    quis dignissim. Sed vel nibh ut libero malesuada commodo vitae sed nibh. Nullam ac urna 
+                    tortor. Morbi gravida leo ut tortor semper suscipit. Integer quis velit pharetra, 
+                    pulvinar velit id, fermentum odio. In eu porttitor erat.
+                  </p>
+                </div> <!-- end of card body-->
+              </div> <!--end of card-->
             </div><!--end of google maps section -->
             <!-- stat section -->
             <div>
-              <p>Integer rutrum neque mi, ut ultricies nulla finibus eget. Nullam ipsum urna, dignissim quis lacinia faucibus, euismod id augue. Donec sagittis ac quam id rhoncus. Fusce fringilla consectetur tristique. Duis tincidunt libero eu porta interdum. Praesent a elementum mi, nec sollicitudin ex. Donec vel pulvinar diam. Mauris accumsan vitae ligula quis dignissim. Sed vel nibh ut libero malesuada commodo vitae sed nibh. Nullam ac urna tortor. Morbi gravida leo ut tortor semper suscipit. Integer quis velit pharetra, pulvinar velit id, fermentum odio. In eu porttitor erat.</p>
+              <div class="card">
+                <div class="card-header"><h3>Indeed</h3></div>
+                <div class="card-body" id="indeed">
+                  <p>Integer rutrum neque mi, ut ultricies nulla finibus eget. Nullam ipsum urna, dignissim 
+                    quis lacinia faucibus, euismod id augue. Donec sagittis ac quam id rhoncus. Fusce 
+                    fringilla consectetur tristique. Duis tincidunt libero eu porta interdum. Praesent a 
+                    elementum mi, nec sollicitudin ex. Donec vel pulvinar diam. Mauris accumsan vitae ligula
+                    quis dignissim. Sed vel nibh ut libero malesuada commodo vitae sed nibh. Nullam ac urna 
+                    tortor. Morbi gravida leo ut tortor semper suscipit. Integer quis velit pharetra, 
+                    pulvinar velit id, fermentum odio. In eu porttitor erat.
+                  </p>
+                </div>
+              </div><!--end of panel body for Indeed stats-->
+
             </div>
           </div>
         </div><!--end of results-->
       </div><!-- end of panel containing results-->
+
+      <footer class="page-footer center-on-small-only">
+          <p style="test-align:center;"> Copyright Stuff</p>
+        </div>
+      </footer>
     </div><!-- end of row--> 
 
   </div> <!--end of container-->
