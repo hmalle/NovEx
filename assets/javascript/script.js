@@ -14,6 +14,7 @@ $(document).ready(function() {
 	firebase.initializeApp(config);
 
 	var database = firebase.database();
+  var tempImage = "no image";
 
 	// This function will be called any time a new profile is added to our database.
 	// We will do our jQuery call here to append profile divs (or cards if we are using bootstrap) to our html
@@ -56,12 +57,12 @@ $(document).ready(function() {
         dateAdded: firebase.database.ServerValue.TIMESTAMP
   		});
       // Clear the form text boxes after submit
-      $("#name").val("");
-      $("#loc").val("");
-      $("#tradeInput").val("");
-      $("#image").val("");
-      $("#bio").val("");
-      $("#contact").val("")
+      $("#name").val(" ");
+      $("#loc").val(" ");
+      $("#tradeInput").val(" ");
+      $("#image").val(" ");
+      $("#bio").val(" ");
+      $("#contact").val(" ")
     }
   });
     
