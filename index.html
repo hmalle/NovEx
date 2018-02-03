@@ -10,20 +10,19 @@
 
 <body>
   <div class="container container-fluid everything">
-    <!--
-    <div class="jumbotron jumbotron-fluid" style="">
-      <h1 class="text-center">NovEx</h1>
-    </div>
-    -->
-
-    <div class="container container-fluid" id="header">
-      <nav class="navbar navbar-light bg-light justify-content-between">
-        <a class="navbar-brand">NovEx</a>
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </nav> 
+    <div class="row" id="header">
+      <div class="col-lg-12" style="padding: 0px">
+        <div class="card">
+        <div class="card-body">
+        <nav class="navbar navbar-light bg-light"> 
+          <a class="navbar-brand" href="#"><h2>NovEx<h2></a>
+          <form class="form-inline">
+            <p class="float-right">The LOGO Will be in this section</p>
+          </form>
+        </nav> 
+        </div><!--end of card body-->
+        </div>
+      </div>
     </div> <!--end of header-->
 
     <div class="row" id="searchBar">
@@ -33,21 +32,40 @@
             Search
           </div>
           <div class="card-body">
-            <div class="novice">
-              <p>Novice stuff: floats left </p>
-              <button class="btn" id="search">Search By Trade & ZipCode</button>
+            <div class="row">
+              <div class="col-md-6 float-left" id="novice">
+                <form>
+                  <div class="form-group">
+                    <label for="tradeSearch">Select Trade</label>
+                    <form> <!--<form action="/action_page.php"> -->
+                      <select name="trade" id="tradeSearch">
+                        <option value="carpenter">Carpenter</option>
+                        <option value="electrician">Electrician</option>
+                        <option value="welder">Welder</option>
+                        <option value="plumber">Plumber</option>
+                      </select>
+                    </form>
+                  </div>
+                  <div class="form-group form-inline">
+                    <label for="location-input">Location</label>
+                    <input class="form-control" id="location" type="text" placeholder="Enter city or zipcode">
+                  </div>
+                </form>
+                <button class="btn btn-primary" id="searchBtn">Search Experts</button>
+              </div>
+              <div class="col-md-6 float-right" id="expert">
+                <p>You got some skills and looking for apprentices, Please enter your profile</p>
+                <a href="profile.html">
+                  <button type="button" class="btn btn-primary" id="makeProfile">Create Profile</button>
+                </a>
+              </div>
             </div>
+          </div><!-- end of card body-->
+        </div> <!--end of card-->
+      </div> <!--end of col-lg-12-->
+    </div><!--end of searchBar-->
 
-            <div class="expert">
-              <p>Expert stuff: floats floats right </p>
-              <button>Create Profile</button>
-            </div>
-          </div><!-- end of panel body-->
-        </div> <!--end of panel-->
-      </div>
-    </div><!--end of row-->
-
-    <div class="row">
+    <div class="row" id="mainContent">
       <div class="card">
         <div class="card-header">
           Results
@@ -102,18 +120,23 @@
                     pulvinar velit id, fermentum odio. In eu porttitor erat.
                   </p>
                 </div>
-              </div><!--end of panel body for Indeed stats-->
-
+              </div><!--end of card body for Indeed stats-->
             </div>
           </div>
         </div><!--end of results-->
-      </div><!-- end of panel containing results-->
+      </div><!-- end of card containing results-->
+    </div><!--end of what main Content-->
 
-      <footer class="page-footer center-on-small-only">
-          <p style="test-align:center;"> Copyright Stuff</p>
+    <!--beginning of footer-->
+    <div class="row" id="footer">
+      <div class="col-md-12" style="padding: 0px;">
+        <div class="card" >
+          <div class="card-body">
+            <p> &copy;Copyright 2018 </p>
+          </div>
         </div>
-      </footer>
-    </div><!-- end of row--> 
+      </div>
+    </div> <!-- end of footer -->
 
   </div> <!--end of container-->
 
