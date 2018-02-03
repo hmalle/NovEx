@@ -20,7 +20,7 @@ $(document).ready(function() {
     // index.html
   	database.ref().orderByChild("dateAdded").limitToLast(5).once("value", function(childSnapshot){
   		var dataName = childSnapshot.val().name;
-  		var dataLoc = childSnapshot.val().location;
+  		var dataLoc = childSnapshot.val().loc;
   		var dataTrade = childSnapshot.val().trade;
   		var dataImg = childSnapshot.val().image;
   		var dataBio = childSnapshot.val().bio;
@@ -46,7 +46,7 @@ $(document).ready(function() {
   		event.preventDefault();
 
   		var expertName = $("#name").val().trim();
-  		var expertLoc = $("#location").val().trim();
+  		var expertLoc = $("#loc").val().trim();
   		var expertTrade = $("#trade").val();
   		var expertImg = tempImage;
   		var expertBio = $("#bio").val().trim();
@@ -54,7 +54,7 @@ $(document).ready(function() {
 
   		database.ref().push({
   			name: expertName,
-  			location: expertLoc,
+  			loc: expertLoc,
   			trade: expertTrade,
   			image: expertImg,
   			bio: expertBio,
@@ -71,11 +71,10 @@ $(document).ready(function() {
 
   		// Clear the form text boxes after submit
   		$("#name").val("");
-  		$("#location").val("");
+  		$("#loc").val("");
   		$("#trade").val("");
   		$("#image").val("");
   		$("#bio").val("");
   		$("#contact").val("");
   	})
-
 });
