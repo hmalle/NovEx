@@ -30,6 +30,7 @@ $(document).ready(function() {
 	// This function will be called any time a new profile is added to our database.
 	// We will do our jQuery call here to append profile divs (or cards if we are using bootstrap) to our html
   // index.html
+  // **NOT WORKING**
 
   //  database.ref().orderByChild("dateAdded").limitToLast(5).once("value", function(childSnapshot){
 	// 	var dataName = childSnapshot.val().name;
@@ -46,16 +47,16 @@ $(document).ready(function() {
 	// Pushes the expert's newly created profile information to the database
   // profile.html
 	$("#add-profile").on("click", function(event){
-	  // Prevents the page from reloading on click
-    event.preventDefault();
-    var expertName = $("#name").val().trim();
-    var expertLoc = $("#loc").val().trim();
-    var expertTrade = $("#tradeInput").val();
-    var expertImg = tempImage;
-    var expertBio = $("#bio").val().trim();
-    var expertContact = $("#contact").val().trim();
-    console.log(expertName, expertLoc, expertTrade, expertImg, expertBio, expertContact)
-    //
+		// Prevents the page from reloading on click
+		event.preventDefault();
+		var expertName = $("#name").val().trim();
+		var expertLoc = $("#loc").val().trim();
+		var expertTrade = $("#tradeInput").val();
+		var expertImg = tempImage;
+		var expertBio = $("#bio").val().trim();
+		var expertContact = $("#contact").val().trim();
+    console.log(expertName, expertLoc, expertTrade, expertImg, expertBio, expertContact);
+
     if(expertName != undefined && expertLoc != undefined && expertImg != undefined && expertBio != undefined && expertContact != undefined) {
       database.ref().push({
         name: expertName,
@@ -65,7 +66,8 @@ $(document).ready(function() {
         bio: expertBio,
         contact: expertContact,
         dateAdded: firebase.database.ServerValue.TIMESTAMP
-      });
+  		});
+      console.lg(expertName, expertLoc, expertTrade, expertImg, expertBio, expertContact);
       // Clear the form text boxes after submit
       $("#name").val(" ");
       $("#loc").val(" ");
