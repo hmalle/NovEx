@@ -1,2 +1,13 @@
 
+#sideSection .card{
+  margin-bottom: 5px;
+}
+#map{
+  width: 100%;
+  height:350px;
+  margin-bottom: 5px;
+}
+#header, #searchBar, #mainContent{
+  margin-bottom: 10px;
+}
 

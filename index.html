@@ -48,7 +48,7 @@
                   </div>
                   <div class="form-group form-inline">
                     <label for="loc">Location</label>
-                    <input class="form-control" id="loc" type="text" placeholder="Enter city or zipcode">
+                    <input class="form-control" id="loc" type="text" placeholder="Enter an address">
                   </div>
                 </form>
                 <button class="btn btn-primary" id="searchBtn">Search Experts</button>
@@ -93,8 +93,9 @@
             <!--google map section -->
             <div>
               <div class="card">
-                <div class=card-header><h3>Maps</h3></div>
+                <div class=card-header>Maps</div>
                 <div class="card-body" id="map">
+                  <!--
                   <p>Integer rutrum neque mi, ut ultricies nulla finibus eget. Nullam ipsum urna, dignissim 
                     quis lacinia faucibus, euismod id augue. Donec sagittis ac quam id rhoncus. Fusce 
                     fringilla consectetur tristique. Duis tincidunt libero eu porta interdum. Praesent a 
@@ -103,13 +104,14 @@
                     tortor. Morbi gravida leo ut tortor semper suscipit. Integer quis velit pharetra, 
                     pulvinar velit id, fermentum odio. In eu porttitor erat.
                   </p>
+                  -->
                 </div> <!-- end of card body-->
               </div> <!--end of card-->
             </div><!--end of google maps section -->
             <!-- stat section -->
             <div>
               <div class="card">
-                <div class="card-header"><h3>Indeed</h3></div>
+                <div class="card-header">Indeed</div>
                 <div class="card-body" id="indeed">
                   <p>Integer rutrum neque mi, ut ultricies nulla finibus eget. Nullam ipsum urna, dignissim 
                     quis lacinia faucibus, euismod id augue. Donec sagittis ac quam id rhoncus. Fusce 
@@ -145,5 +147,6 @@
   <script src="http://code.jquery.com/jquery-3.3.1.min.js" ></script>
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
   <script src="assets/javascript/script.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnBhiFh5vRGwz9cQ9eBX2lhFszC_e1jrA&callback=initMap" async defer></script>
 </body>
 <html>
