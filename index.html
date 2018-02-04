@@ -17,7 +17,7 @@
         <nav class="navbar navbar-light bg-light"> 
           <a class="navbar-brand" href="#"><h2>NovEx<h2></a>
           <form class="form-inline">
-            <img src="assets/images/logo.png" style="height: 300px">
+            <img src="assets/images/logo.png" style="height: 150px;">
           </form>
         </nav> 
         </div><!--end of card body-->
@@ -92,7 +92,7 @@
           <div class="col-md-5 float-right" id="sideSection">
             <!--google map section -->
             <div>
-              <div class="card">
+              <div class="card googleMapsCard">
                 <div class=card-header><h3>Maps</h3></div>
                 <div class="card-body" id="map">
                   <p>Integer rutrum neque mi, ut ultricies nulla finibus eget. Nullam ipsum urna, dignissim 
@@ -108,7 +108,7 @@
             </div><!--end of google maps section -->
             <!-- stat section -->
             <div>
-              <div class="card">
+              <div class="card indeedCard">
                 <div class="card-header"><h3>Indeed</h3></div>
                 <div class="card-body" id="indeed">
                   <p>Integer rutrum neque mi, ut ultricies nulla finibus eget. Nullam ipsum urna, dignissim 
@@ -144,6 +144,7 @@
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
   <script src="http://code.jquery.com/jquery-3.3.1.min.js" ></script>
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
-  <script src="assets/javascript/script.js"></script>
+  <script src="assets/javascript/script.js"></script> <!-- has to come before the googlemaps script below-->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnBhiFh5vRGwz9cQ9eBX2lhFszC_e1jrA&callback=initMap" async defer></script>
 </body>
 <html>
