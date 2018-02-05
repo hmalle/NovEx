@@ -156,19 +156,12 @@ $(document).ready(function() {
 
     $.ajax({
       type: "GET",
+      // Had to use a Haroku Proxy URL to make the API call work.
       url: proxy + queryURL
     }).done(function(response){
       for (i = 0; i < 3; i++) {
         $("#jobs").append().html("<p>" + response[i].title + "</p>");
       }
-      // $.each( response.items, function( i, item ) {
-      //   debugger;
-      //   console.log(response.status);
-      //   $("#jobs").append().html("<p>" + response.i.title + "</p>");
-      //   if ( i === 3 ) {
-      //     return false;
-      //   }
-      // });
     });
   };
 
