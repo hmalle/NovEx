@@ -5,9 +5,9 @@
 //before the document is ready.
 var map;
 function initMap(){
-  console.log("The map is being initialized");
+  //console.log("The map is being initialized");
   map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 37.8716, lng: -122.2727 },
+      center: {lat: 37.8716, lng: -122.2727 }, //initially center it around berkeley!
       zoom: 9
     });
 }
@@ -49,7 +49,7 @@ $(document).ready(function() {
 	  // Prevents the page from reloading on click
     event.preventDefault();
     var expertName = $("#name").val().trim();
-    var expertLoc = $("#loc").val().trim();
+    var expertLoc = getCoordinates($("#loc").val().trim());
     var expertTrade = $("#tradeInput").val();
     var expertImg = tempImage;
     var expertBio = $("#bio").val().trim();
@@ -89,32 +89,68 @@ $(document).ready(function() {
   // This function will be called when the user clicks the search button
   // Searches database for conditionals and appends profile cards to #profiles div
   // index.html
-  $("#searchBtn").on("click", function(event) {
-      
+  $("#searchBtn").on("click", function(ev) {
+    ev.preventDefault();
+    var addr = $("#loc").val().trim();
+    var tradeTitle = $("#tradeInput").val();
+    var coordinates = getCoordinates(addr);
+    //center the search coordinates on the map canvas!!
+    if(coordinates){ //ignore displaying on the map if its undefined!!
+      map = new google.maps.Map(document.getElementById('map'),{
+        center: coordinates,
+        zoom: 15
+      });
+      //TODO: markers will be triggered in the findExperts function that reads data from the database!
+      var marker = new google.maps.Marker({ 
+        animation: google.maps.Animation.DROP,
+        draggable: true,
+        position: coordinates, 
+        map: map
+      });
+      marker.setMap(map); //marker.setMap(null) //removes the marker!
+    }
+    findExperts(tradeTitle, coordinates);
+    displayJobs( tradeTitle, addr); //display jobs available in the area!!
   });
-  
-  //------------------------------------------------------------------------------------------------------------------------
+
+  //----------------------------------------------------------------------------------
   //google maps stuff below here 
   //https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY 
   var baseURL = "https://maps.googleapis.com/maps/api/geocode/json?address="; 
-  var address = "1995 University Avenue, Berkeley, CA";
-  getCoordinates( address);  //returned : {lat: 37.8720355, lng: -122.271258} 
+  //var address = "1995 University Avenue, Berkeley, CA";
+  //getCoordinates( address);  //returned : {lat: 37.8720355, lng: -122.271258} 
   var mapsApiKey = "AIzaSyAnBhiFh5vRGwz9cQ9eBX2lhFszC_e1jrA";
   function getCoordinates(addr){
+    var coordinates;
     var queryURL = baseURL + addr +"="+ mapsApiKey;
-    $.ajax({ url: queryURL, method: "GET" }).done( function(response){
-      //console.log(response.results[0].geometry.location);
-      var coordinates = response.results[0].geometry.location;
-      console.log(coordinates);
-      map = new google.maps.Map(document.getElementById('map'), {
-          center: coordinates,
-          zoom:17
-      });
-      return coordinates;
+    $.ajax({ 
+      url: queryURL, 
+      async:false,  //must wait for this function to complete before firing return! 
+      timeout: 5000, //set timeout of 5 secs so we arent here forever!
+      method: "GET" 
+      }).done(function(response){
+      if(response.status === "OK"){ //then we have at least one result!!
+        coordinates = response.results[0].geometry.location;
+        console.log(coordinates);
+      }else{
+        console.log("Error: No coordinates were found for the searched address");
+      }
     });
+    console.log("Coordinates: "+JSON.stringify(coordinates));
+    return coordinates;
   }
-  //TODO: get the values from the on seachBtn 
-  //      place a pin on the map.
-  //      get user values from the database  based on the search query and address coordinate. 
+  //---------------------------------------------------------------------------------- 
+  function findExperts (tradeTitle, coordinates){
+    //a function to match the tradeTitle and available experts in te specified region(coordinates)
+    //TODO: get user values from the database  based on the search query and address coordinate. 
+    //TODO: first be able to drop markers on map for all users present,
+    //TODO: then select the users that matches the specified radius from the users address!!
+  }
+  function displayJobs (jobTitle, address){
+    //TODO: display jobs available in the area using a job search api
+    //TODO: and display jobs on the id #jobs!
+    console.log("displaying jobs using some job search API");
+  }
+
 
 });
