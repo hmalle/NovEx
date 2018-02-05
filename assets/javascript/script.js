@@ -110,7 +110,7 @@ $(document).ready(function() {
       marker.setMap(map); //marker.setMap(null) //removes the marker!
     }
     findExperts(tradeTitle, coordinates);
-    displayJobs( tradeTitle, addr); //display jobs available in the area!!
+    displayJobs(tradeTitle, coordinates); //display jobs available in the area!!
   });
 
   //----------------------------------------------------------------------------------
@@ -146,11 +146,24 @@ $(document).ready(function() {
     //TODO: first be able to drop markers on map for all users present,
     //TODO: then select the users that matches the specified radius from the users address!!
   }
-  function displayJobs (jobTitle, address){
+  function displayJobs (tradeTitle, coordinates){
     //TODO: display jobs available in the area using a job search api
     //TODO: and display jobs on the id #jobs!
     console.log("displaying jobs using some job search API");
-  }
+    console.log(coordinates.lat);
+    var queryURL = "https://jobs.github.com/positions.json?lat=37.3229978&long=-122.0321823&description=intern&markdown=true";
+    var proxy = 'https://cors-anywhere.herokuapp.com/';
+
+    $.ajax({
+      type: "GET",
+      // Had to use a Haroku Proxy URL to make the API call work.
+      url: proxy + queryURL
+    }).done(function(response){
+      for (i = 0; i < 3; i++) {
+        $("#jobs").append().html("<p>" + response[i].title + "</p>");
+      }
+    });
+  };
 
 
 });
