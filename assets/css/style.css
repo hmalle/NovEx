@@ -1,2 +1,11 @@
 
+#header, #searchBar, #mainContent{
+  margin-bottom: 10px;
+}
 
+.googleMapsCard{
+  margin-bottom: 5px;
+}
+#map{
+  height: 350px;
+}

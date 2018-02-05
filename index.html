@@ -2,42 +2,142 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Bootstrap Portfolio</title>
+  <title>NovEx</title>
   <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body>
-  <div class="container container-fluid">
-    <!-- Jumbotron Title -->
-    <div class="jumbotron jumbotron-fluid">
-      <h1 class="text-center">NovEx</h1>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Search</h3>
-          </div>
-          <div class="panel-body">
-          <div class="novice">
-            <p>Novice stuff: floats left </p>
-          </div>
-           <div class="expert">
-            <p>Expert stuff: floats floats right </p>
-          </div>         
+  <div class="container container-fluid everything">
+    <div class="row" id="header">
+      <div class="col-lg-12" style="padding: 0px">
+        <div class="card">
+        <div class="card-body">
+        <nav class="navbar navbar-light bg-light"> 
+          <a class="navbar-brand" href="index.html"><h2>NovEx<h2></a>
+          <form class="form-inline">
+            <img src="assets/images/logo.png" style="height: 150px;">
+          </form>
+        </nav> 
+        </div><!--end of card body-->
+        </div>
       </div>
-    </div>
-  </div>
-  
+    </div> <!--end of header-->
+
+    <div class="row" id="searchBar">
+      <div class="col-lg-12" style="padding: 0px;">
+        <div class="card">
+          <div class="card-header">
+            Search
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 float-left" id="novice">
+                <form>
+                  <div class="form-group">
+                    <label for="tradeSearch">Select Trade</label>
+                    <form> <!--<form action="/action_page.php"> -->
+                      <select name="trade" id="tradeSearch">
+                        <option value="carpenter">Carpenter</option>
+                        <option value="electrician">Electrician</option>
+                        <option value="welder">Welder</option>
+                        <option value="plumber">Plumber</option>
+                      </select>
+                    </form>
+                  </div>
+                  <div class="form-group form-inline">
+                    <label for="loc">Location</label>
+                    <input class="form-control" id="loc" type="text" placeholder="Enter a full address">
+                  </div>
+                </form>
+                <button class="btn btn-primary" id="searchBtn">Search Experts</button>
+              </div>
+              <div class="col-md-6 float-right" id="expert">
+                <p>You got some skills and looking for apprentices, Please enter your profile</p>
+                <a href="profile.html">
+                  <button type="button" class="btn btn-primary" id="makeProfile">Create Profile</button>
+                </a>
+              </div>
+            </div>
+          </div><!-- end of card body-->
+        </div> <!--end of card-->
+      </div> <!--end of col-lg-12-->
+    </div><!--end of searchBar-->
+
+    <div class="row" id="mainContent">
+      <div class="card">
+        <div class="card-header">
+          Results
+        </div>
+        <div class="card-body" id="results">
+          <div class="col-md-7 float-left" >
+            <div class="card">
+              <div class="card-header">
+                Profiles
+              </div>
+              <div class="card-body" id="profiles">
+              	<!-- profiles go here -->
+              </div>
+            </div> <!-- end of card-->
+          </div> <!--end of profiles-->
+
+          <div class="col-md-5 float-right" id="sideSection">
+            <!--google map section -->
+            <div>
+              <div class="card googleMapsCard">
+                <div class=card-header>Maps</div>
+                <div class="card-body" id="map">
+                  <p>Integer rutrum neque mi, ut ultricies nulla finibus eget. Nullam ipsum urna, dignissim 
+                    quis lacinia faucibus, euismod id augue. Donec sagittis ac quam id rhoncus. Fusce 
+                    fringilla consectetur tristique. Duis tincidunt libero eu porta interdum. Praesent a 
+                    elementum mi, nec sollicitudin ex. Donec vel pulvinar diam. Mauris accumsan vitae ligula
+                    quis dignissim. Sed vel nibh ut libero malesuada commodo vitae sed nibh. Nullam ac urna 
+                    tortor. Morbi gravida leo ut tortor semper suscipit. Integer quis velit pharetra, 
+                    pulvinar velit id, fermentum odio. In eu porttitor erat.
+                  </p>
+                </div> <!-- end of card body-->
+              </div> <!--end of card-->
+            </div><!--end of google maps section -->
+            <!-- stat section -->
+            <div>
+              <div class="card indeedCard">
+                <div class="card-header">Jobs</div>
+                <div class="card-body" id="jobs">
+                  <p>Integer rutrum neque mi, ut ultricies nulla finibus eget. Nullam ipsum urna, dignissim 
+                    quis lacinia faucibus, euismod id augue. Donec sagittis ac quam id rhoncus. Fusce 
+                    fringilla consectetur tristique. Duis tincidunt libero eu porta interdum. Praesent a 
+                    elementum mi, nec sollicitudin ex. Donec vel pulvinar diam. Mauris accumsan vitae ligula
+                    quis dignissim. Sed vel nibh ut libero malesuada commodo vitae sed nibh. Nullam ac urna 
+                    tortor. Morbi gravida leo ut tortor semper suscipit. Integer quis velit pharetra, 
+                    pulvinar velit id, fermentum odio. In eu porttitor erat.
+                  </p>
+                </div>
+              </div><!--end of card body for Indeed stats-->
+            </div>
+          </div>
+        </div><!--end of results-->
+      </div><!-- end of card containing results-->
+    </div><!--end of what main Content-->
+
+    <!--beginning of footer-->
+    <div class="row" id="footer">
+      <div class="col-md-12" style="padding: 0px;">
+        <div class="card" >
+          <div class="card-body">
+            <p> &copy;Copyright 2018 </p>
+          </div>
+        </div>
+      </div>
+    </div> <!-- end of footer -->
+
   </div> <!--end of container-->
 
   <!-- JavaScript -->
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
   <script src="http://code.jquery.com/jquery-3.3.1.min.js" ></script>
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
-  <script src="assets/javascript/script.js"></script>
+  <script src="assets/javascript/script.js"></script> <!-- has to come before the googlemaps script below-->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnBhiFh5vRGwz9cQ9eBX2lhFszC_e1jrA&callback=initMap" async defer></script>
 </body>
 <html>
