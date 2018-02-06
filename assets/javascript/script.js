@@ -95,17 +95,26 @@ $(document).ready(function() {
     ev.preventDefault();
     var addr = $("#loc").val().trim();
     var tradeTitle = $("#tradeInput").val();
-    var coordinates = getCoordinates(addr);
-    console.log("Got those coordinates "+JSON.stringify(coordinates));
-    //center the search coordinates on the map canvas!!
-    if(coordinates){ //ignore displaying on the map if its undefined!!
-      map = new google.maps.Map(document.getElementById('map'),{
-        center: coordinates,
-        zoom: 15
-      });
-      findExperts(tradeTitle, coordinates);
-      displayJobs( tradeTitle, addr); //display jobs available in the area!!
-    }
+    var placeId; 
+    var coordinates;
+    service.getQueryPredictions({input: addr},function(predictions,status){
+      if(status != google.maps.places.PlacesServiceStatus.OK) { return; }
+      console.log(JSON.stringify(predictions[0].place_id));
+      placeId = predictions[0].place_id;
+    });
+    setTimeout( function(){
+      //wait 500milliseconds before calling getCoordinates
+      coordinates = getCoordinates(placeId);
+      //center the search coordinates on the map canvas!!
+      if(coordinates){ //ignore displaying on the map if its undefined!!
+        map = new google.maps.Map(document.getElementById('map'),{
+          center: coordinates,
+          zoom: 10
+        });
+        findExperts(tradeTitle, coordinates);
+        displayJobs( tradeTitle, addr); //display jobs available in the area!!
+      }
+    }, 500);
   });
 
   //----------------------------------------------------------------------------------
@@ -118,13 +127,9 @@ $(document).ready(function() {
   //getCoordinates( address);  //returned : {lat: 37.8720355, lng: -122.271258} 
   var mapsApiKey = "&key=AIzaSyAnBhiFh5vRGwz9cQ9eBX2lhFszC_e1jrA";
   //https://maps.googleapis.com/maps/api/place/autocomplete/output?parameters
-  function getCoordinates(addr){
+  function getCoordinates(placeId){
+    var coordinates;
     //gets the coordinates from an address!
-    var placeId; 
-    service.getQueryPredictions({input: addr},function(predictions,status){
-      if(status != google.maps.places.PlacesServiceStatus.OK) { return; }
-      console.log(JSON.stringify(predictions[0].place_id));
-      placeId = predictions[0].place_id;
       $.ajax({ 
         url: geocodeBaseURL + placeId + mapsApiKey, 
         async:false,  //must wait for this function to complete before firing return! 
@@ -138,7 +143,6 @@ $(document).ready(function() {
           console.log("Error: No coordinates were found for the searched address");
         }
       });
-    });
     console.log("Coordinates: "+JSON.stringify(coordinates));
     return coordinates; //TODO: HOW ON EARTH CAN I DELAY THIS RETURN TILL THE CODE ABOVE IS DONE!!!!!
   }
