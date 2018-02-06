@@ -147,7 +147,7 @@ $(document).ready(function() {
           zoom: 9
         });
         findExperts(tradeTitle, coordinates);
-        displayJobs( tradeTitle, addr); //display jobs available in the area!!
+        displayJobs( tradeTitle, coordinates); //display jobs available in the area!!
       }else{
         console.log("No coordinates returned from your location input");
       }
@@ -261,11 +261,11 @@ $(document).ready(function() {
       console.log(response.length)
       for (i = 0; i < 4; i++) {
         $("#jobs").append("<div class='card'>"+
-         "<div class='card-header'>"+ response[i].title +"</div>"+
-         "div class='card-body'>" +
-          "<p>Location: "+ response[i].location + "</p>"+
-          "<p>Description: "+ response[i].description +
-          "<p>How to Apply: "+ responsep[i].how_to_apply
+         "<div class='card-header h2'>"+ response[i].title +"</div>"+
+         "<div class='card-body mx-2'>" +
+          "<p class='h3'>Location: "+ response[i].location + "</p>"+
+          "<br>"+ response[i].description +
+          "<br><br>"+ response[i].how_to_apply + "</div>"
          );
       }
     });
@@ -273,3 +273,4 @@ $(document).ready(function() {
 
 });
 
+});
