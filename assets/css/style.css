@@ -12,3 +12,7 @@
 #bioImg{
   width: 100%;
 }
+.jumbotron {
+	background: url("../images/networking.jpg");
+	
+}
