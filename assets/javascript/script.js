@@ -5,6 +5,8 @@
 //for initalizing google map!!
 //If I place it in document.ready, the initMap is called but it isnt known yet
 //before the document is ready.
+$("#validate").parsley().isValid()
+
 var map;
 function initMap(){
   //console.log("The map is being initialized");
