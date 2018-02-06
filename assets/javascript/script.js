@@ -100,52 +100,131 @@ $(document).ready(function() {
         center: coordinates,
         zoom: 15
       });
-      //TODO: markers will be triggered in the findExperts function that reads data from the database!
-      var marker = new google.maps.Marker({ 
-        animation: google.maps.Animation.DROP,
-        draggable: true,
-        position: coordinates, 
-        map: map
-      });
-      marker.setMap(map); //marker.setMap(null) //removes the marker!
+      findExperts(tradeTitle, coordinates);
+      displayJobs( tradeTitle, addr); //display jobs available in the area!!
     }
-    findExperts(tradeTitle, coordinates);
-    displayJobs(tradeTitle, coordinates); //display jobs available in the area!!
   });
 
   //----------------------------------------------------------------------------------
+  var service = new google.maps.places.AutocompleteService();
   //google maps stuff below here 
   //https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY 
-  var baseURL = "https://maps.googleapis.com/maps/api/geocode/json?address="; 
+  var placesBaseURL = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=";
+  var geocodeBaseURL = "https://maps.googleapis.com/maps/api/geocode/json?place_id="; 
   //var address = "1995 University Avenue, Berkeley, CA";
   //getCoordinates( address);  //returned : {lat: 37.8720355, lng: -122.271258} 
-  var mapsApiKey = "AIzaSyAnBhiFh5vRGwz9cQ9eBX2lhFszC_e1jrA";
+  var mapsApiKey = "&key=AIzaSyAnBhiFh5vRGwz9cQ9eBX2lhFszC_e1jrA";
+  //https://maps.googleapis.com/maps/api/place/autocomplete/output?parameters
   function getCoordinates(addr){
+    //gets the coordinates from an address!
     var coordinates;
-    var queryURL = baseURL + addr +"="+ mapsApiKey;
-    $.ajax({ 
-      url: queryURL, 
-      async:false,  //must wait for this function to complete before firing return! 
-      timeout: 5000, //set timeout of 5 secs so we arent here forever!
-      method: "GET" 
+    var placeId; 
+    service.getQueryPredictions({input: addr},function(predictions,status){
+      if(status != google.maps.places.PlacesServiceStatus.OK) { return; }
+      console.log(JSON.stringify(predictions[0].place_id));
+      placeId = predictions[0].place_id;
+      $.ajax({ 
+        url: geocodeBaseURL + placeId + mapsApiKey, 
+        async:false,  //must wait for this function to complete before firing return! 
+        //timeout: 5000, //set timeout of 5 secs so we arent here forever!
+        method: "GET" 
       }).done(function(response){
-      if(response.status === "OK"){ //then we have at least one result!!
-        coordinates = response.results[0].geometry.location;
-        console.log(coordinates);
-      }else{
-        console.log("Error: No coordinates were found for the searched address");
-      }
+        if(response.status === "OK"){ //then we have at least one result!!
+          coordinates = response.results[0].geometry.location;
+          console.log(coordinates);
+        }else{
+          console.log("Error: No coordinates were found for the searched address");
+        }
+      });
     });
     console.log("Coordinates: "+JSON.stringify(coordinates));
     return coordinates;
   }
+
   //---------------------------------------------------------------------------------- 
-  function findExperts (tradeTitle, coordinates){
+  function findExperts (/*tradeTitle, coordinates*/){
     //a function to match the tradeTitle and available experts in te specified region(coordinates)
-    //TODO: get user values from the database  based on the search query and address coordinate. 
-    //TODO: first be able to drop markers on map for all users present,
-    //TODO: then select the users that matches the specified radius from the users address!!
+    var experts;
+    database.ref().orderByChild("dateAdded").limitToLast(5).once("value", function(snapshot){
+      //experts = JSON.stringify(snapshot);
+      snapshot.forEach(function(childSnapshot){
+        var prof = {
+          name: childSnapshot.val().name,
+          trade : childSnapshot.val().trade,
+          contact : childSnapshot.val().contact,
+          bio : childSnapshot.val().bio,
+        };
+        displayProfile( prof );
+        coordinates = childSnapshot.val().loc;
+        //TODO: markers will be triggered in the findExperts function that reads data from the database!
+        var marker = new google.maps.Marker({ 
+          animation: google.maps.Animation.DROP,
+          //draggable: true,
+          position: coordinates, 
+          map: map
+        });
+        marker.setMap(map); //marker.setMap(null) //removes the marker!
+      });
+    },function(errorObject){ console.log("Errors handled: "+errorObject.code); });
   }
+
+  function displayProfile(prof){
+    //TODO: This function needs more work to include formattion needed on the profiles!
+    $("#profiles").append("<div class='card' id='prof'>"+
+      "<div class='card-header'>"+ prof.name +"</div>"+
+      "<div class='card-body'>" +
+        "<div class='col-sm-4 float-left'>" +  
+          "<img id='bioImg' src='http://lorempixel.com/150/150/'>" +
+        "</div>"+
+        "<div class='col-sm-8 float-right'>"+
+          "<p> Trade: "+prof.trade +"</p>" +
+          "<p>contact: "+prof.contact+"</p>"+
+          "<p>Bio: "+prof.bio +"</p></div>" +
+        "</div>"+
+      "</div>");
+  }
+
+  function findExperts (/*tradeTitle, coordinates*/){
+    //a function to match the tradeTitle and available experts in te specified region(coordinates)
+    var experts;
+    database.ref().orderByChild("dateAdded").limitToLast(5).once("value", function(snapshot){
+      //experts = JSON.stringify(snapshot);
+      snapshot.forEach(function(childSnapshot){
+        var prof = {
+          name: childSnapshot.val().name,
+          trade : childSnapshot.val().trade,
+          contact : childSnapshot.val().contact,
+          bio : childSnapshot.val().bio,
+        };
+        displayProfile( prof );
+        coordinates = childSnapshot.val().loc;
+        //TODO: markers will be triggered in the findExperts function that reads data from the database!
+        var marker = new google.maps.Marker({ 
+          animation: google.maps.Animation.DROP,
+          //draggable: true,
+          position: coordinates, 
+          map: map
+        });
+        marker.setMap(map); //marker.setMap(null) //removes the marker!
+      });
+    },function(errorObject){ console.log("Errors handled: "+errorObject.code); });
+  }
+  function displayProfile(prof){
+    //TODO: This function needs more work to include formattion needed on the profiles!
+    $("#profiles").append("<div class='card' id='prof'>"+
+      "<div class='card-header'>"+ prof.name +"</div>"+
+      "<div class='card-body'>" +
+        "<div class='col-sm-4 float-left'>" +  
+          "<img id='bioImg' src='http://lorempixel.com/150/150/'>" +
+        "</div>"+
+        "<div class='col-sm-8 float-right'>"+
+          "<p> Trade: "+prof.trade +"</p>" +
+          "<p>contact: "+prof.contact+"</p>"+
+          "<p>Bio: "+prof.bio +"</p></div>" +
+        "</div>"+
+      "</div>");
+  }
+
   function displayJobs (tradeTitle, coordinates){
     //TODO: display jobs available in the area using a job search api
     //TODO: and display jobs on the id #jobs!
