@@ -233,7 +233,7 @@ $(document).ready(function() {
   function displayJobs (tradeTitle, coordinates){
     console.log("displaying jobs using some job search API");
     console.log(coordinates.lat);
-    var queryURL = "https://jobs.github.com/positions.json?lat=" + coordinates.lat + "&long=" + coordinates.long + "&description=intern&markdown=true";
+    var queryURL = "https://jobs.github.com/positions.json?lat=" + coordinates.lat + "&lng=" + coordinates.long + "&description=intern&markdown=true";
     var proxy = 'https://cors-anywhere.herokuapp.com/';
 
     $.ajax({
