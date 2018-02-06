@@ -233,7 +233,7 @@ $(document).ready(function() {
   function displayJobs (tradeTitle, coordinates){
     console.log("displaying jobs using some job search API");
     console.log(coordinates.lat);
-    var queryURL = "https://jobs.github.com/positions.json?lat=37.3229978&long=-122.0321823&description=intern&markdown=true";
+    var queryURL = "https://jobs.github.com/positions.json?lat=" + coordinates.lat + "&long=" + coordinates.lng + "&description=intern&markdown=true";
     var proxy = 'https://cors-anywhere.herokuapp.com/';
 
     $.ajax({
@@ -241,11 +241,18 @@ $(document).ready(function() {
       // Had to use a Haroku Proxy URL to make the API call work.
       url: proxy + queryURL
     }).done(function(response){
-      for (i = 0; i < 3; i++) {
-        $("#jobs").append().html("<p>" + response[i].title + "</p>");
+      console.log(response.length)
+      for (i = 0; i < 4; i++) {
+        $("#jobs").append("<div class='card'>"+
+         "<div class='card-header'>"+ response[i].title +"</div>"+
+         "div class='card-body'>" +
+          "<p>Location: "+ response[i].location + "</p>"+
+          "<p>Description: "+ response[i].description +
+          "<p>How to Apply: "+ responsep[i].how_to_apply
+         );
       }
     });
-  };
+  };  
 
 });
 
