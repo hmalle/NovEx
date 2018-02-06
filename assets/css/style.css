@@ -2,9 +2,14 @@
 #header, #searchBar, #mainContent{
   margin-bottom: 10px;
 }
-
+#sideSection{
+  padding: 0px 4px;
+}
 .googleMapsCard{
   margin-bottom: 5px;
+}
+#mainContentCard{
+  width: 100%;
 }
 #map{
   height: 350px;
@@ -12,6 +17,23 @@
 #bioImg{
   width: 100%;
 }
+
+#results{
+  padding: 5px 0px;
+  width: 100%;
+}
+#containProfiles{
+  padding: 0px;
+}
+#profiles{
+  padding:0px;
+}
+#prof .card-body{
+  padding: 2px 0px;
+}
+p{
+  margin: 3px;
+  
 .jumbotron {
 	background: url("../images/networking.jpg");
 	

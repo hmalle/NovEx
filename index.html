@@ -61,7 +61,7 @@
     </div><!--end of searchBar-->
 
     <div class="row" id="mainContent">
-      <div class="card">
+      <div class="card" id="mainContentCard">
         <div class="card-header">
           Results
         </div>
@@ -71,7 +71,7 @@
               <div class="card-header">
                 Profiles
               </div>
-              <div class="card-body">
+              <div class="card-body" id="containProfiles">
                 <div class="col-lg-12" id="profiles"></div>
               </div>
             </div> <!-- end of card-->
@@ -83,6 +83,7 @@
               <div class="card googleMapsCard">
                 <div class=card-header>Maps</div>
                 <div class="card-body" id="map">
+                <!--
                   <p>Integer rutrum neque mi, ut ultricies nulla finibus eget. Nullam ipsum urna, dignissim 
                     quis lacinia faucibus, euismod id augue. Donec sagittis ac quam id rhoncus. Fusce 
                     fringilla consectetur tristique. Duis tincidunt libero eu porta interdum. Praesent a 
@@ -91,6 +92,7 @@
                     tortor. Morbi gravida leo ut tortor semper suscipit. Integer quis velit pharetra, 
                     pulvinar velit id, fermentum odio. In eu porttitor erat.
                   </p>
+                -->
                 </div> <!-- end of card body-->
               </div> <!--end of card-->
             </div><!--end of google maps section -->
@@ -135,6 +137,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.1/parsley.js"></script>
 
   <script src="assets/javascript/script.js"></script> <!-- has to come before the googlemaps script below-->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnBhiFh5vRGwz9cQ9eBX2lhFszC_e1jrA&libraries=places&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnBhiFh5vRGwz9cQ9eBX2lhFszC_e1jrA&libraries=places" async defer></script>
 </body>
 <html>
