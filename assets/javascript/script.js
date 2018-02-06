@@ -1,5 +1,4 @@
 
-//TODO: Sometimes I get initMap is not defined till I reload the page again!!
 //TODO: Error in the deployed page where
 
 //for initalizing google map!!
@@ -7,21 +6,17 @@
 //before the document is ready.
 
 $(document).ready(function() {
+  //console.log("Starting up again");
   var map;
   var markerArray=[];
-  var service; 
+  var service = new google.maps.places.AutocompleteService();
   function initMap(){
     //console.log("The map is being initialized");
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 37.8716, lng: -122.2727 }, //initially center it around berkeley!
       zoom: 9
     });
-    service = new google.maps.places.AutocompleteService();
   }
-  setTimeout(function(){
-    initMap();
-    initPage();
-  },1000);
 
 	// Initialize Firebase
 	var config = {
@@ -34,6 +29,12 @@ $(document).ready(function() {
 	};
 	firebase.initializeApp(config);
 	var database = firebase.database();
+  //a little delay for the database and maps to be loaded!! TODO: Is this necessary? 
+  //TODO: Sometimes I get initMap is not defined till I reload the page again!!
+  setTimeout(function(){
+    initMap();
+    initPage();
+  },1000);
   var tempImage = "no image";
 
 	// This function will be called any time a new profile is added to our database.
@@ -82,8 +83,8 @@ $(document).ready(function() {
     var placeId;
     service.getQueryPredictions({input: $("#loc").val().trim() },function(predictions,status){
       if(status != google.maps.places.PlacesServiceStatus.OK) { return; }
-      console.log(JSON.stringify(predictions[0].place_id));
       placeId = predictions[0].place_id;
+      console.log("New Place Id "+ plaaceId);
     });
     setTimeout( function(){
       //wait 500milliseconds before calling getCoordinates
