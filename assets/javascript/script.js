@@ -117,6 +117,9 @@ $(document).ready(function() {
         displayJobs( tradeTitle, addr); //display jobs available in the area!!
       }
     }, 500);
+
+    // email validation pulling from parsley.js library
+    $("#validate").parsley();
   });
 
   //----------------------------------------------------------------------------------
