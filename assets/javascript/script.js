@@ -1,4 +1,6 @@
 
+//TODO: Sometimes I get initMap is not defined till I reload the page again!!
+//TODO: Error in the deployed page where
 
 //for initalizing google map!!
 //If I place it in document.ready, the initMap is called but it isnt known yet
@@ -94,6 +96,7 @@ $(document).ready(function() {
     var addr = $("#loc").val().trim();
     var tradeTitle = $("#tradeInput").val();
     var coordinates = getCoordinates(addr);
+    console.log("Got those coordinates "+JSON.stringify(coordinates));
     //center the search coordinates on the map canvas!!
     if(coordinates){ //ignore displaying on the map if its undefined!!
       map = new google.maps.Map(document.getElementById('map'),{
@@ -117,7 +120,6 @@ $(document).ready(function() {
   //https://maps.googleapis.com/maps/api/place/autocomplete/output?parameters
   function getCoordinates(addr){
     //gets the coordinates from an address!
-    var coordinates;
     var placeId; 
     service.getQueryPredictions({input: addr},function(predictions,status){
       if(status != google.maps.places.PlacesServiceStatus.OK) { return; }
@@ -138,7 +140,7 @@ $(document).ready(function() {
       });
     });
     console.log("Coordinates: "+JSON.stringify(coordinates));
-    return coordinates;
+    return coordinates; //TODO: HOW ON EARTH CAN I DELAY THIS RETURN TILL THE CODE ABOVE IS DONE!!!!!
   }
 
   //---------------------------------------------------------------------------------- 
@@ -156,7 +158,6 @@ $(document).ready(function() {
         };
         displayProfile( prof );
         coordinates = childSnapshot.val().loc;
-        //TODO: markers will be triggered in the findExperts function that reads data from the database!
         var marker = new google.maps.Marker({ 
           animation: google.maps.Animation.DROP,
           //draggable: true,
@@ -169,7 +170,6 @@ $(document).ready(function() {
   }
 
   function displayProfile(prof){
-    //TODO: This function needs more work to include formattion needed on the profiles!
     $("#profiles").append("<div class='card' id='prof'>"+
       "<div class='card-header'>"+ prof.name +"</div>"+
       "<div class='card-body'>" +
@@ -198,7 +198,6 @@ $(document).ready(function() {
         };
         displayProfile( prof );
         coordinates = childSnapshot.val().loc;
-        //TODO: markers will be triggered in the findExperts function that reads data from the database!
         var marker = new google.maps.Marker({ 
           animation: google.maps.Animation.DROP,
           //draggable: true,
@@ -209,8 +208,8 @@ $(document).ready(function() {
       });
     },function(errorObject){ console.log("Errors handled: "+errorObject.code); });
   }
+
   function displayProfile(prof){
-    //TODO: This function needs more work to include formattion needed on the profiles!
     $("#profiles").append("<div class='card' id='prof'>"+
       "<div class='card-header'>"+ prof.name +"</div>"+
       "<div class='card-body'>" +
@@ -226,8 +225,6 @@ $(document).ready(function() {
   }
 
   function displayJobs (tradeTitle, coordinates){
-    //TODO: display jobs available in the area using a job search api
-    //TODO: and display jobs on the id #jobs!
     console.log("displaying jobs using some job search API");
     console.log(coordinates.lat);
     var queryURL = "https://jobs.github.com/positions.json?lat=37.3229978&long=-122.0321823&description=intern&markdown=true";
@@ -244,5 +241,5 @@ $(document).ready(function() {
     });
   };
 
-
 });
+
