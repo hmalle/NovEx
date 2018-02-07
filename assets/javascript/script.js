@@ -259,8 +259,8 @@ $(document).ready(function() {
         $("#jobs").append("<div class='card mb-3'>"+
          "<div class='card-header h2'>"+ response[i].title +"</div>"+
          "<div class='card-body mx-2'>" +
-          "<p class='h4'>Location: </p>"+ response[i].location + "<br><br>" +
-          "<p class='h4'>Company: </p>" + response[i].company + "<br><br>" + 
+          "<p class='h4'>Location: </p>"+ "<p>" + response[i].location + "</p><br>" +
+          "<p class='h4'>Company: </p>" + "<p>" + response[i].company + "</p><br>" + 
           "<p class='h4'>Job Information: </p>" + shortDescription + "<br><br>" +
           "<p class='h4'>Apply Now: </p>" +
           response[i].how_to_apply + "</div>"

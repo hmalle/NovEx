@@ -1,3 +1,7 @@
+/*fonts*/
+p{
+	font-family: 'Roboto', sans-serif;
+}
 
 #header, #searchBar, #mainContent{
   margin-bottom: 10px;
@@ -14,6 +18,7 @@
 #map{
   height: 350px;
 }
+
 #bioImg{
   width: 100%;
 }
@@ -22,18 +27,23 @@
   padding: 5px 0px;
   width: 100%;
 }
+
 #containProfiles{
   padding: 0px;
 }
+
 #profiles{
   padding:0px;
 }
+
 #prof .card-body{
   padding: 2px 0px;
 }
+
 p{
   margin: 3px;
 }
+
 .jumbotron {
 	background: url("../images/networking.jpg");
 	border-bottom: 5px solid white;
