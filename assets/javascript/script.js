@@ -17,10 +17,7 @@ $(document).ready(function() {
       zoom: 9
     });
   }
-
-$(document).ready(function() {
-  // $("#validate").parsley();
-
+  $(".profileMap").hide();
 	// Initialize Firebase
 	var config = {
   	apiKey: "AIzaSyCXKNHRqS-OvGJ7ClQvWaJyf62CNlzzxkE",
@@ -81,13 +78,13 @@ $(document).ready(function() {
     var expertImg = tempImage;
     var expertBio = $("#bio").val().trim();
     var expertContact = $("#contact").val().trim();
-    console.log(expertName, expertLoc, expertTrade, expertImg, expertBio, expertContact)
+    //console.log(expertName, expertLoc, expertTrade, expertImg, expertBio, expertContact)
     //
     var placeId;
     service.getQueryPredictions({input: $("#loc").val().trim() },function(predictions,status){
       if(status != google.maps.places.PlacesServiceStatus.OK) { return; }
       placeId = predictions[0].place_id;
-      console.log("New Place Id "+ plaaceId);
+      //console.log("New place id "+placeId);
     });
     setTimeout( function(){
       //wait 500milliseconds before calling getCoordinates
@@ -102,7 +99,7 @@ $(document).ready(function() {
           contact: expertContact,
           dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
-        console.log(expertName, expertLoc, expertTrade, expertImg, expertBio, expertContact);
+        //console.log(expertName, expertLoc, expertTrade, expertImg, expertBio, expertContact);
         // Clear the form text boxes after submit
         $("#name").val(" ");
         $("#loc").val(" ");
@@ -120,7 +117,7 @@ $(document).ready(function() {
   $("#add-image").on("click", function(openDialog){
     openDialog.preventDefault();
     tempImage = $("#fileid").click();
-    console.log(tempImage);
+    //console.log(tempImage);
   });
 
   // This function will be called when the user clicks the search button
@@ -134,7 +131,7 @@ $(document).ready(function() {
     var coordinates;
     service.getQueryPredictions({input: addr},function(predictions,status){
       if(status != google.maps.places.PlacesServiceStatus.OK) { return; }
-      console.log(JSON.stringify(predictions[0].place_id));
+      //console.log(JSON.stringify(predictions[0].place_id));
       placeId = predictions[0].place_id;
     });
     setTimeout( function(){
@@ -153,7 +150,7 @@ $(document).ready(function() {
       }
     }, 500);
 
-    // email validation pulling from parsley.js library
+    //TODO email validation pulling from parsley.js library
     $("#validate").parsley();
   });
 
@@ -162,8 +159,6 @@ $(document).ready(function() {
   //https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY 
   var placesBaseURL = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=";
   var geocodeBaseURL = "https://maps.googleapis.com/maps/api/geocode/json?place_id="; 
-  //var address = "1995 University Avenue, Berkeley, CA";
-  //getCoordinates( address);  //returned : {lat: 37.8720355, lng: -122.271258} 
   var mapsApiKey = "&key=AIzaSyAnBhiFh5vRGwz9cQ9eBX2lhFszC_e1jrA";
   //https://maps.googleapis.com/maps/api/place/autocomplete/output?parameters
   function getCoordinates(placeId){
@@ -177,12 +172,12 @@ $(document).ready(function() {
       }).done(function(response){
         if(response.status === "OK"){ //then we have at least one result!!
           coordinates = response.results[0].geometry.location;
-          console.log(coordinates);
+          //console.log(coordinates);
         }else{
           console.log("Error: No coordinates were found for the searched address");
         }
       });
-    console.log("Coordinates: "+JSON.stringify(coordinates));
+    //console.log("Coordinates: "+JSON.stringify(coordinates));
     return coordinates; 
   }
 
@@ -197,7 +192,7 @@ $(document).ready(function() {
       }
       markersArray.length = 0;
     }
-    database.ref().orderByChild("dateAdded").limitToLast(5).once("value", function(snapshot){
+    database.ref().orderByChild("dateAdded").once("value", function(snapshot){
       //experts = JSON.stringify(snapshot);
       $("#profiles").empty(); //empty the profile before appending new experts!!
       snapshot.forEach(function(childSnapshot){
@@ -208,10 +203,9 @@ $(document).ready(function() {
           bio : childSnapshot.val().bio,
         };
         var locate = childSnapshot.val().loc;
-        console.log("Coordinate: "+JSON.stringify(locate));
         var latDiff = Math.abs(parseFloat(locate.lat) - parseFloat(coordinates.lat));
         var lngDiff = Math.abs(parseFloat(locate.lng) - parseFloat(coordinates.lng));
-        console.log("lat , lng = " + latDiff + " , " + lngDiff);
+        //console.log("latDiff , lngDiff = " + latDiff + " , " + lngDiff);
         if(latDiff <=0.5 && lngDiff <= 0.5){
           displayProfile( prof );
           var marker = new google.maps.Marker({ 
@@ -254,7 +248,6 @@ $(document).ready(function() {
     console.log(coordinates.lat);
     var queryURL = "https://jobs.github.com/positions.json?lat=" + coordinates.lat + "&long=" + coordinates.lng + "&description=" + tradeTitle;
     var proxy = 'https://cors-anywhere.herokuapp.com/';
-
     $.ajax({
       type: "GET",
       // Had to use a Haroku Proxy URL to make the API call work.
@@ -273,7 +266,5 @@ $(document).ready(function() {
       }
     });
   };  
-
-});
 
 });
