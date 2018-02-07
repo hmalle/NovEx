@@ -82,10 +82,9 @@ body {
 }
 
 .footer{
-  padding: 0px;
-  /*position:fixed;
-  bottom: 0;*/
-  margin: 5px;
+  margin-top: 5px;
+  position: relative;
+  bottom: 0;
 }
 
 .profInfo {
