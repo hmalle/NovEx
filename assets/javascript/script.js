@@ -192,7 +192,7 @@ $(document).ready(function() {
       }
       markersArray.length = 0;
     }
-    database.ref().orderByChild("dateAdded").limitToLast(5).once("value", function(snapshot){
+    database.ref().orderByChild("dateAdded").once("value", function(snapshot){
       //experts = JSON.stringify(snapshot);
       $("#profiles").empty(); //empty the profile before appending new experts!!
       snapshot.forEach(function(childSnapshot){
@@ -258,7 +258,7 @@ $(document).ready(function() {
           "<p>Location: "+ response[i].location + "</p>"+
           "<p>Description: "+ response[i].description +
           "<p>How to Apply: "+ response[i].how_to_apply
-         );
+        );
       }
     });
   };  
