@@ -206,10 +206,10 @@ $(document).ready(function() {
           "<img id='bioImg' src='"+pic_arr[selector]+"'>" +
         "</div>"+
         "<div class='col-sm-8 float-right'>"+
-          "<p>Name   :"+prof.name+"</p>"+
-          "<p>Trade  :"+prof.trade +"</p>" +
-          "<p>Contact:"+prof.contact+"</p>"+
-          "<p>Bio    :"+prof.bio +"</p></div>" +
+          "<p>Name:   "+prof.name+"</p>"+
+          "<p>Trade:  "+prof.trade +"</p>" +
+          "<p>Contact: "+prof.contact+"</p>"+
+          "<p>Bio:    "+prof.bio +"</p></div>" +
         "</div>"+
       "</div>");
   }
