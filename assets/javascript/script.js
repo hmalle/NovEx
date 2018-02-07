@@ -255,13 +255,13 @@ $(document).ready(function() {
     }).done(function(response){
       console.log(response.length)
       for (i = 0; i < response.length && i < 6; i++) {
-        var shortDescription = jQuery.trim(response[i].description).substring(0, 500);
+        var shortDescription = jQuery.trim(response[i].description).substring(0, 600);
         $("#jobs").append("<div class='card mb-3'>"+
          "<div class='card-header h2'>"+ response[i].title +"</div>"+
          "<div class='card-body mx-2'>" +
-          "<p class='h4'>Location: </p>"+ "<p>" + response[i].location + "</p><br>" +
-          "<p class='h4'>Company: </p>" + "<p>" + response[i].company + "</p><br>" + 
-          "<p class='h4'>Job Information: </p>" + shortDescription + "<br><br>" +
+          "<p class='h4'>Location: </p>"+ "<p>" + response[i].location + "</p>" +
+          "<p class='h4'>Company: </p>" + "<p>" + response[i].company + "</p>" + 
+          "<p class='h4'>Job Information: </p>" + shortDescription + "<span>. . .</span>" + "<br><br>" +
           "<p class='h4'>Apply Now: </p>" +
           response[i].how_to_apply + "</div>"
          );
