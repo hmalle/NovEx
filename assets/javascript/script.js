@@ -239,7 +239,7 @@ $(document).ready(function() {
     var selector = Math.floor(Math.random()*5);
     $("#profiles").append("<div class='card' id='prof'>"+
       "<div class='card-body'>" +
-        "<div class='col-sm-4 float-left'>" +  
+        "<div class='col-sm-4 float-left'>" + 
           "<img id='bioImg' src='"+pic_arr[selector]+"'>" +
 
         "</div>"+
