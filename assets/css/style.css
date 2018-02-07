@@ -1,5 +1,5 @@
 /*fonts*/
-p{
+p, span{
 	font-family: 'Roboto', sans-serif;
 }
 
@@ -52,6 +52,7 @@ p{
 	font-family: 'Share Tech Mono', monospace;
 
 }
+
 .card-header{
   background-color:#68a2ff ;
   border: none;

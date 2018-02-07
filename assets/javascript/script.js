@@ -1,22 +1,26 @@
 
+
 //TODO: Error in the deployed page where
 
 //for initalizing google map!!
 //If I place it in document.ready, the initMap is called but it isnt known yet
 //before the document is ready.
 
+
 $(document).ready(function() {
-  //console.log("Starting up again");
+
+
   var map;
   var markerArray=[];
   var service = new google.maps.places.AutocompleteService();
   function initMap(){
-    //console.log("The map is being initialized");
+
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 37.8716, lng: -122.2727 }, //initially center it around berkeley!
       zoom: 9
     });
   }
+
   $(".profileMap").hide();
 	// Initialize Firebase
 	var config = {
@@ -27,6 +31,7 @@ $(document).ready(function() {
   	storageBucket: "novex-17441.appspot.com",
   	messagingSenderId: "748623444399"
 	};
+
 	firebase.initializeApp(config);
 	var database = firebase.database();
   //a little delay for the database and maps to be loaded!! TODO: Is this necessary? 
@@ -35,7 +40,6 @@ $(document).ready(function() {
     initMap();
     initPage();
   },1000);
-  var tempImage = "no image";
 
 	// This function will be called any time a new profile is added to our database.
 	// We will do our jQuery call here to append profile divs (or cards if we are using bootstrap) to our html
@@ -78,32 +82,33 @@ $(document).ready(function() {
     var expertImg = tempImage;
     var expertBio = $("#bio").val().trim();
     var expertContact = $("#contact").val().trim();
-    //console.log(expertName, expertLoc, expertTrade, expertImg, expertBio, expertContact)
-    //
     var placeId;
     service.getQueryPredictions({input: $("#loc").val().trim() },function(predictions,status){
       if(status != google.maps.places.PlacesServiceStatus.OK) { return; }
       placeId = predictions[0].place_id;
-      //console.log("New place id "+placeId);
+
     });
     setTimeout( function(){
       //wait 500milliseconds before calling getCoordinates
       expertLoc = getCoordinates(placeId);
+
       if(expertName != undefined && expertLoc != undefined && expertBio != undefined && expertContact != undefined) {
+
         database.ref().push({
           name: expertName,
           loc: expertLoc,
           trade: expertTrade,
-        
+
           bio: expertBio,
           contact: expertContact,
           dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
-        //console.log(expertName, expertLoc, expertTrade, expertImg, expertBio, expertContact);
+
         // Clear the form text boxes after submit
         $("#name").val(" ");
         $("#loc").val(" ");
         $("#tradeInput").val(" ");
+
         $("#bio").val(" ");
         $("#contact").val(" ")
       }
@@ -236,6 +241,7 @@ $(document).ready(function() {
       "<div class='card-body'>" +
         "<div class='col-sm-4 float-left'>" +  
           "<img id='bioImg' src='"+pic_arr[selector]+"'>" +
+
         "</div>"+
         "<div class='col-sm-8 float-right'>"+
           "<p>Name   :"+prof.name+"</p>"+
@@ -259,13 +265,15 @@ $(document).ready(function() {
     }).done(function(response){
       console.log(response.length)
       for (i = 0; i < response.length && i < 6; i++) {
-        var shortDescription = jQuery.trim(response[i].description).substring(0, 500);
+
+        var shortDescription = jQuery.trim(response[i].description).substring(0, 600);
         $("#jobs").append("<div class='card mb-3'>"+
          "<div class='card-header h2'>"+ response[i].title +"</div>"+
          "<div class='card-body mx-2'>" +
-          "<p class='h4'>Location: </p>"+ "<p>" + response[i].location + "</p><br>" +
-          "<p class='h4'>Company: </p>" + "<p>" + response[i].company + "</p><br>" + 
-          "<p class='h4'>Job Information: </p>" + shortDescription + "<br><br>" +
+          "<p class='h4'>Location: </p>"+ "<p>" + response[i].location + "</p>" +
+          "<p class='h4'>Company: </p>" + "<p>" + response[i].company + "</p>" + 
+          "<p class='h4'>Job Information: </p>" + shortDescription + "<span>. . .</span>" + "<br><br>" +
+
           "<p class='h4'>Apply Now: </p>" +
           response[i].how_to_apply + "</div>"
          );
