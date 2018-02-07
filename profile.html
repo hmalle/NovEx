@@ -6,24 +6,22 @@
   <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <!-- fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 
 <body>
-  <div class="container container-fluid everything">    
-    <div class="row" id="header">
-      <div class="col-12" style="padding: 0px">
-        <div class="card">
-        <div class="card-body">
-        <nav class="navbar navbar-light bg-light"> 
-          <a class="navbar-brand" href="index.html"><h2>NovEx<h2></a>
-          <form class="form-inline">
-            <p class="float-right">The LOGO Will be in this section</p>
-          </form>
-        </nav> 
-        </div><!--end of card body-->
+
+    <div id="header">
+        <div class="jumbotron">
+            <h1 class="display-1"><strong>noVex</strong> </h1>
+            <p>Connecting Novices with Experts</p>
+            <p> </p>
         </div>
-      </div>
-    </div> <!--end of header-->
+
+  <div class="container container-fluid everything">    
+  
   
   <!-- Creating Entry Form -->
   <!-- Entry form panel heading -->
@@ -33,7 +31,7 @@
           <div class="card-header">Add Expert Profile</div>
           <!-- Creating form input fields -->
           <div class="card-body">
-            <form>
+            <form id="validate">
               <div class="form-group">
                 <label for="expert-name-input">Name</label>
                 <input class="form-control" id="name" type="text">
@@ -46,10 +44,11 @@
                 <label for="tradeInput">Select Your Trade</label>
                 <form> <!--<form action="/action_page.php"> -->
                   <select name="trade" id="tradeInput">
-                    <option value="carpenter">Carpenter</option>
-                    <option value="electrician">Electrician</option>
-                    <option value="welder">Welder</option>
-                    <option value="plumber">Plumber</option>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="python">Python</option>
+                    <option value="javascript">Javascript</option>
+                    <option value="node">NodeJS</option>
                   </select>
                 </form>
               <!-- <type="text"> -->
@@ -60,12 +59,11 @@
               </div>
               <div class="form-group">
                 <label for="contact-input">Email</label>
-                <input class="form-control" id="contact" type="email" placeholder="this@that.com">
+                <input class="form-control" id="contact" type="email" data-parsley-type="email" data-parsley-required placeholder="this@that.com">
               </div>
               <div class="form-group">
                 <label for="image-input"></label>
                 <input class="form-control" id="fileid" type="file" hidden/>
-                <input id="add-image" class="btn btn-secondary" type="button" value="Upload Photo" />
               </div>
               <a href="index.html">
                 <button class="btn btn-primary" id="add-profile" type="submit">Submit</button>
@@ -75,10 +73,12 @@
         </div> <!--end of card -->
       </div> <!--end of col-lg-12 -->
     </div> <!--end of the row -->
-
+    
+    <!-- <div class="profileMap" id="map"></div> -->
+    
     <!--beginning of footer-->
     <div class="row" id="footer">
-      <div class="col-12" style="padding: 0px;">
+      <div class="col-12" style="padding: 10px 0 0 0;">
         <div class="card" >
           <div class="card-body">
             <p> &copy;Copyright 2018 </p>
@@ -90,13 +90,12 @@
 
   </div><!-- end of everything-->
 
-
-
   <!-- JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-  <script src="http://code.jquery.com/jquery-3.3.1.min.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.1/parsley.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
   <script src="assets/javascript/script.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnBhiFh5vRGwz9cQ9eBX2lhFszC_e1jrA" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnBhiFh5vRGwz9cQ9eBX2lhFszC_e1jrA&libraries=places" async defer></script>
 </body>
 <html>
