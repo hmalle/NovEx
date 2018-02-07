@@ -1,22 +1,16 @@
 
-//TODO: Error in the deployed page where
-
-//for initalizing google map!!
-//If I place it in document.ready, the initMap is called but it isnt known yet
-//before the document is ready.
-
 $(document).ready(function() {
-  //console.log("Starting up again");
+
   var map;
   var markerArray=[];
   var service = new google.maps.places.AutocompleteService();
   function initMap(){
-    //console.log("The map is being initialized");
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 37.8716, lng: -122.2727 }, //initially center it around berkeley!
       zoom: 9
     });
   }
+
   $(".profileMap").hide();
 	// Initialize Firebase
 	var config = {
@@ -27,6 +21,7 @@ $(document).ready(function() {
   	storageBucket: "novex-17441.appspot.com",
   	messagingSenderId: "748623444399"
 	};
+
 	firebase.initializeApp(config);
 	var database = firebase.database();
   //a little delay for the database and maps to be loaded!! TODO: Is this necessary? 
@@ -78,13 +73,10 @@ $(document).ready(function() {
     var expertImg = tempImage;
     var expertBio = $("#bio").val().trim();
     var expertContact = $("#contact").val().trim();
-    //console.log(expertName, expertLoc, expertTrade, expertImg, expertBio, expertContact)
-    //
     var placeId;
     service.getQueryPredictions({input: $("#loc").val().trim() },function(predictions,status){
       if(status != google.maps.places.PlacesServiceStatus.OK) { return; }
       placeId = predictions[0].place_id;
-      //console.log("New place id "+placeId);
     });
     setTimeout( function(){
       //wait 500milliseconds before calling getCoordinates
@@ -99,7 +91,6 @@ $(document).ready(function() {
           contact: expertContact,
           dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
-        //console.log(expertName, expertLoc, expertTrade, expertImg, expertBio, expertContact);
         // Clear the form text boxes after submit
         $("#name").val(" ");
         $("#loc").val(" ");
@@ -110,20 +101,11 @@ $(document).ready(function() {
       }
     }, 500);
   });
-    
-  // This function will be called when the add-image button is clicked
-  // Takes an image from the user and saves it as a value
-  // profile.html
-  $("#add-image").on("click", function(openDialog){
-    openDialog.preventDefault();
-    tempImage = $("#fileid").click();
-    //console.log(tempImage);
-  });
-
-  // This function will be called when the user clicks the search button
-  // Searches database for conditionals and appends profile cards to #profiles div
-  // index.html
+ 
   $("#searchBtn").on("click", function(ev) {
+    // This function will be called when the user clicks the search button
+    // Searches database for conditionals and appends profile cards to #profiles div
+    // index.html
     ev.preventDefault();
     var addr = $("#loc").val().trim();
     var tradeTitle = $("#tradeSearch").val();
@@ -207,28 +189,31 @@ $(document).ready(function() {
         var lngDiff = Math.abs(parseFloat(locate.lng) - parseFloat(coordinates.lng));
         //console.log("latDiff , lngDiff = " + latDiff + " , " + lngDiff);
         if(latDiff <=0.5 && lngDiff <= 0.5){
-          displayProfile( prof );
-          var marker = new google.maps.Marker({ 
-            animation: google.maps.Animation.DROP,
-            //draggable: true,
-            position: locate, 
-            map: map
-          });
-          marker.setMap(map); //marker.setMap(null) //removes the marker!
+          if(prof.trade === tradeTitle){
+            displayProfile( prof );
+            var marker = new google.maps.Marker({ 
+              animation: google.maps.Animation.DROP,
+              //draggable: true,
+              position: locate, 
+              map: map
+            });
+            marker.setMap(map); //marker.setMap(null) //removes the marker!
+          }
         }
       });
     },function(errorObject){ console.log("Errors handled: "+errorObject.code); });
   }
 
   function clearMarkers(){
+    //remove all markers off the map!
     for(var a=0; a<markerArray.length; a++){
       markerArray[a].setMap(null);
     }
     markerArray.length = 0;
   }
+
   function displayProfile(prof){
     $("#profiles").append("<div class='card' id='prof'>"+
-      //"<div class='card-header'>"+ prof.name +"</div>"+
       "<div class='card-body'>" +
         "<div class='col-sm-4 float-left'>" +  
           "<img id='bioImg' src='https://lorempixel.com/150/150/'>" +
