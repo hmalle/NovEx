@@ -126,7 +126,7 @@ $(document).ready(function() {
   $("#searchBtn").on("click", function(ev) {
     ev.preventDefault();
     var addr = $("#loc").val().trim();
-    var tradeTitle = $("#tradeInput").val();
+    var tradeTitle = $("#tradeSearch").val();
     var placeId; 
     var coordinates;
     service.getQueryPredictions({input: addr},function(predictions,status){
@@ -144,7 +144,7 @@ $(document).ready(function() {
           zoom: 9
         });
         findExperts(tradeTitle, coordinates);
-        displayJobs( tradeTitle, addr); //display jobs available in the area!!
+        displayJobs( tradeTitle, coordinates); //display jobs available in the area!!
       }else{
         console.log("No coordinates returned from your location input");
       }
@@ -243,25 +243,28 @@ $(document).ready(function() {
   }
 
   function displayJobs (tradeTitle, coordinates){
-    var queryURL = "https://jobs.github.com/positions.json?lat=" + coordinates.lat + "&long=" + coordinates.lng + "&description=intern&markdown=true";
+    $("#jobs").html(" ");
+    console.log(tradeTitle);
+    console.log(coordinates.lat);
+    var queryURL = "https://jobs.github.com/positions.json?lat=" + coordinates.lat + "&long=" + coordinates.lng + "&description=" + tradeTitle;
     var proxy = 'https://cors-anywhere.herokuapp.com/';
     $.ajax({
       type: "GET",
       // Had to use a Haroku Proxy URL to make the API call work.
       url: proxy + queryURL
     }).done(function(response){
-      //console.log("Response length: "+response.length)
-      for (i = 0; i <response.length && i<5 ; i++) {
-        $("#jobs").append("<div class='card'>"+
-         "<div class='card-header'>"+ response[i].title +"</div>"+
-         "div class='card-body'>" +
-          "<p>Location: "+ response[i].location + "</p>"+
-          "<p>Description: "+ response[i].description +
-          "<p>How to Apply: "+ response[i].how_to_apply
-        );
+      console.log(response.length)
+      for (i = 0; i < response.length; i++) {
+        $("#jobs").append("<div class='card mb-3'>"+
+         "<div class='card-header h2'>"+ response[i].title +"</div>"+
+         "<div class='card-body mx-2'>" +
+          "<p class='h4'>Location: </p>"+ response[i].location +
+          "<p class='h4'>Company: </p>" + response[i].company + "<br><br>" + 
+          "<p class='h4'>Job Information: </p>" + response[i].description +
+          "<br>"+ response[i].how_to_apply + "</div>"
+         );
       }
     });
   };  
 
 });
-
