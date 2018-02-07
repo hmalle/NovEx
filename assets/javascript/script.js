@@ -210,7 +210,7 @@ $(document).ready(function() {
         "<div class='col-sm-4 float-left'>" + 
           "<img id='bioImg' src='"+pic_arr[selector]+"'>" +
         "</div>"+
-        "<div class='col-sm-8 float-right'>"+
+        "<div class='col-sm-8 float-right mt-5'>"+
           "<p>Name:   "+prof.name+"</p>"+
           "<p>Trade:  "+prof.trade +"</p>" +
           "<p>Contact: "+prof.contact+"</p>"+
