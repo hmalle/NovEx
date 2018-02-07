@@ -53,6 +53,17 @@ p{
 
 }
 
+.card-header{
+  background-color:#68a2ff ;
+  border: none;
+  font-weight
+}
+
+.card-body{
+  background-color:#d2def2 ;
+  font-weight:;
+  border:none;
+}
 body {
 	background: url("../images/background.jpg");
 	background-size: 100% 100%;

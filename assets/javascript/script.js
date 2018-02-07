@@ -1,10 +1,20 @@
 
+
+//TODO: Error in the deployed page where
+
+//for initalizing google map!!
+//If I place it in document.ready, the initMap is called but it isnt known yet
+//before the document is ready.
+
+
 $(document).ready(function() {
+
 
   var map;
   var markerArray=[];
   var service = new google.maps.places.AutocompleteService();
   function initMap(){
+
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 37.8716, lng: -122.2727 }, //initially center it around berkeley!
       zoom: 9
@@ -30,7 +40,6 @@ $(document).ready(function() {
     initMap();
     initPage();
   },1000);
-  var tempImage = "no image";
 
 	// This function will be called any time a new profile is added to our database.
 	// We will do our jQuery call here to append profile divs (or cards if we are using bootstrap) to our html
@@ -77,35 +86,48 @@ $(document).ready(function() {
     service.getQueryPredictions({input: $("#loc").val().trim() },function(predictions,status){
       if(status != google.maps.places.PlacesServiceStatus.OK) { return; }
       placeId = predictions[0].place_id;
+
     });
     setTimeout( function(){
       //wait 500milliseconds before calling getCoordinates
       expertLoc = getCoordinates(placeId);
-      if(expertName != undefined && expertLoc != undefined && expertImg != undefined && expertBio != undefined && expertContact != undefined) {
+
+      if(expertName != undefined && expertLoc != undefined && expertBio != undefined && expertContact != undefined) {
+
         database.ref().push({
           name: expertName,
           loc: expertLoc,
           trade: expertTrade,
-          image: expertImg,
+
           bio: expertBio,
           contact: expertContact,
           dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
+
         // Clear the form text boxes after submit
         $("#name").val(" ");
         $("#loc").val(" ");
         $("#tradeInput").val(" ");
-        $("#image").val(" ");
+
         $("#bio").val(" ");
         $("#contact").val(" ")
       }
     }, 500);
   });
- 
+    
+  // This function will be called when the add-image button is clicked
+  // Takes an image from the user and saves it as a value
+  // profile.html
+  $("#add-image").on("click", function(openDialog){
+    openDialog.preventDefault();
+    tempImage = $("#fileid").click();
+    //console.log(tempImage);
+  });
+
+  // This function will be called when the user clicks the search button
+  // Searches database for conditionals and appends profile cards to #profiles div
+  // index.html
   $("#searchBtn").on("click", function(ev) {
-    // This function will be called when the user clicks the search button
-    // Searches database for conditionals and appends profile cards to #profiles div
-    // index.html
     ev.preventDefault();
     var addr = $("#loc").val().trim();
     var tradeTitle = $("#tradeSearch").val();
@@ -189,34 +211,37 @@ $(document).ready(function() {
         var lngDiff = Math.abs(parseFloat(locate.lng) - parseFloat(coordinates.lng));
         //console.log("latDiff , lngDiff = " + latDiff + " , " + lngDiff);
         if(latDiff <=0.5 && lngDiff <= 0.5){
-          if(prof.trade === tradeTitle){
-            displayProfile( prof );
-            var marker = new google.maps.Marker({ 
-              animation: google.maps.Animation.DROP,
-              //draggable: true,
-              position: locate, 
-              map: map
-            });
-            marker.setMap(map); //marker.setMap(null) //removes the marker!
-          }
+          displayProfile( prof );
+          var marker = new google.maps.Marker({ 
+            animation: google.maps.Animation.DROP,
+            //draggable: true,
+            position: locate, 
+            map: map
+          });
+          marker.setMap(map); //marker.setMap(null) //removes the marker!
         }
       });
     },function(errorObject){ console.log("Errors handled: "+errorObject.code); });
   }
 
   function clearMarkers(){
-    //remove all markers off the map!
     for(var a=0; a<markerArray.length; a++){
       markerArray[a].setMap(null);
     }
     markerArray.length = 0;
   }
-
   function displayProfile(prof){
+    var pic_arr = ["http://donnabertaccini.com/wp-content/uploads/sites/2/2017/09/dmb-passport.jpg",
+                    "http://photos1.blogger.com/blogger/6971/3344/1600/11.0.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/7/76/Russian_passport_photo.JPG",
+                    "http://lifewithouttaffy.com/taffy/blog/wp-content/uploads/2012/09/a-guy.jpg",
+                    "https://qph.fs.quoracdn.net/main-qimg-b64625fb234eb03e9a0e650195d08fad-c"];
+    var selector = Math.floor(Math.random()*5);
     $("#profiles").append("<div class='card' id='prof'>"+
       "<div class='card-body'>" +
         "<div class='col-sm-4 float-left'>" +  
-          "<img id='bioImg' src='https://lorempixel.com/150/150/'>" +
+          "<img id='bioImg' src='"+pic_arr[selector]+"'>" +
+
         "</div>"+
         "<div class='col-sm-8 float-right'>"+
           "<p>Name   :"+prof.name+"</p>"+
@@ -240,6 +265,7 @@ $(document).ready(function() {
     }).done(function(response){
       console.log(response.length)
       for (i = 0; i < response.length && i < 6; i++) {
+
         var shortDescription = jQuery.trim(response[i].description).substring(0, 600);
         $("#jobs").append("<div class='card mb-3'>"+
          "<div class='card-header h2'>"+ response[i].title +"</div>"+
@@ -247,6 +273,7 @@ $(document).ready(function() {
           "<p class='h4'>Location: </p>"+ "<p>" + response[i].location + "</p>" +
           "<p class='h4'>Company: </p>" + "<p>" + response[i].company + "</p>" + 
           "<p class='h4'>Job Information: </p>" + shortDescription + "<span>. . .</span>" + "<br><br>" +
+
           "<p class='h4'>Apply Now: </p>" +
           response[i].how_to_apply + "</div>"
          );
