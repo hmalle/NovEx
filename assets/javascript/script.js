@@ -3,7 +3,7 @@ $(document).ready(function() {
 
   var map;
   var markerArray=[];
-  var service = new google.maps.places.AutocompleteService();
+  var service; 
   function initMap(){
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 37.8716, lng: -122.2727 }, //initially center it around berkeley!
@@ -25,8 +25,10 @@ $(document).ready(function() {
 	firebase.initializeApp(config);
 	var database = firebase.database();
   setTimeout(function(){
+    console.log("Initializing maps");
     initMap();
     initPage();
+    service = new google.maps.places.AutocompleteService();
   },1000);
 
   function initPage(){
@@ -61,34 +63,36 @@ $(document).ready(function() {
     var expertBio = $("#bio").val().trim();
     var expertContact = $("#contact").val().trim();
     var placeId;
-    service.getQueryPredictions({input: $("#loc").val().trim() },function(predictions,status){
-      if(status != google.maps.places.PlacesServiceStatus.OK) { return; }
-      placeId = predictions[0].place_id;
-    });
-    setTimeout( function(){
-      //wait 500milliseconds before calling getCoordinates
-      expertLoc = getCoordinates(placeId);
-      if(expertName != "" && expertLoc != undefined && expertBio != "" && expertContact != "") {
-        // $('#errorModal').modal('hide');
-        database.ref().push({
-          name: expertName,
-          loc: expertLoc,
-          trade: expertTrade,
-          bio: expertBio,
-          contact: expertContact,
-          dateAdded: firebase.database.ServerValue.TIMESTAMP
-        });
-        // Clear the form text boxes after submit
-        $("#name").val(" ");
-        $("#loc").val(" ");
-        $("#tradeInput").val(" ");
-        $("#bio").val(" ");
-        $("#contact").val(" ");
-      }
-      else {
-        $('#errorModal').modal('show');
-      }
-    }, 500);
+    if( $("#loc").val().trim().length > 2 ){
+      service.getQueryPredictions({input: $("#loc").val().trim() },function(predictions,status){
+        if(status != google.maps.places.PlacesServiceStatus.OK) { return; }
+        placeId = predictions[0].place_id;
+      });
+      setTimeout( function(){
+        //wait 500milliseconds before calling getCoordinates
+        expertLoc = getCoordinates(placeId);
+        if(expertName != "" && expertLoc != undefined && expertBio != "" && expertContact != "") {
+          // $('#errorModal').modal('hide');
+          database.ref().push({
+            name: expertName,
+            loc: expertLoc,
+            trade: expertTrade,
+            bio: expertBio,
+            contact: expertContact,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+          });
+          // Clear the form text boxes after submit
+          $("#name").val(" ");
+          $("#loc").val(" ");
+          $("#tradeInput").val(" ");
+          $("#bio").val(" ");
+          $("#contact").val(" ");
+        }
+        else {
+          $('#errorModal').modal('show');
+        }
+      }, 500);
+    }else{ $("#errorModal").modal("show"); }
   });
  
   $("#searchBtn").on("click", function(ev) {
@@ -139,6 +143,7 @@ $(document).ready(function() {
       if(response.status === "OK"){ //then we have at least one result!!
         coordinates = response.results[0].geometry.location;
       }else{
+        coordinates = undefined;
         console.log("Error: No coordinates were found for the searched address");
       }
     });
