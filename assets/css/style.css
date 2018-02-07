@@ -36,5 +36,14 @@ p{
 }
 .jumbotron {
 	background: url("../images/networking.jpg");
-	
+	border-bottom: 5px solid white;
+	padding: 32px;
+	color: white;
+	font-family: 'Share Tech Mono', monospace;
+
+}
+
+body {
+	background: url("../images/background.jpg");
+	background-size: 100% 100%;
 }
