@@ -81,9 +81,10 @@ body {
   float:right;
 }
 
-#footer{
-  position:fixed;
-  bottom: 0;
+.footer{
+  padding: 0px;
+  /*position:fixed;
+  bottom: 0;*/
   margin: 5px;
 }
 
