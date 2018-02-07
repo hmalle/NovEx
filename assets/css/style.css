@@ -20,7 +20,8 @@ p, span{
 }
 
 #bioImg{
-  width: 100%;
+  width: 50%;
+  height: 50%;
 }
 
 #results{
@@ -38,6 +39,10 @@ p, span{
 
 #prof .card-body{
   padding: 2px 0px;
+}
+
+#prof {
+	border: solid white 2px;
 }
 
 p{
@@ -80,4 +85,8 @@ body {
   position:fixed;
   bottom: 0;
   margin: 5px;
+}
+
+.profInfo {
+	margin: auto 0;
 }
