@@ -77,5 +77,6 @@ body {
 }
 
 #footer{
-  float: bottom;
+  position:relative;
+  bottom: 0;
 }
