@@ -56,9 +56,8 @@ $(document).ready(function() {
 	  // Prevents the page from reloading on click
     event.preventDefault();
     var expertName = $("#name").val().trim();
-    var expertLoc ; //= getCoordinates($("#loc").val().trim());
+    var expertLoc ;
     var expertTrade = $("#tradeInput").val();
-    var expertImg = tempImage;
     var expertBio = $("#bio").val().trim();
     var expertContact = $("#contact").val().trim();
     var placeId;
@@ -69,7 +68,8 @@ $(document).ready(function() {
     setTimeout( function(){
       //wait 500milliseconds before calling getCoordinates
       expertLoc = getCoordinates(placeId);
-      if(expertName != undefined && expertLoc != undefined && expertBio != undefined && expertContact != undefined) {
+      if(expertName != "" && expertLoc != undefined && expertBio != "" && expertContact != "") {
+        // $('#errorModal').modal('hide');
         database.ref().push({
           name: expertName,
           loc: expertLoc,
@@ -83,7 +83,10 @@ $(document).ready(function() {
         $("#loc").val(" ");
         $("#tradeInput").val(" ");
         $("#bio").val(" ");
-        $("#contact").val(" ")
+        $("#contact").val(" ");
+      }
+      else {
+        $('#errorModal').modal('show');
       }
     }, 500);
   });
