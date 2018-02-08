@@ -81,6 +81,9 @@ body {
   float:right;
 }
 
+.everything{
+  min-height: 100%;
+}
 
 footer{
   bottom: 0;
