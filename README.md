@@ -1,6 +1,6 @@
 
 # NoVex 
-#####Connecting Novices with Experts in the coding world. 
+##### Connecting Novices with Experts in the coding world. 
 ---
 ### Motivation 
 It is difficult for novices to start out in the coding world. It can be tricky navigating the 
@@ -55,7 +55,7 @@ Database were used for backend development.
 of results. If we search by the same city's zip code, we get a different set of a results 
 (or no results at all). Copy of our function to call Google Maps is here:
 ```
-var placesBaseURL = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=";//Didnt really use this!
+var placesBaseURL = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=";
 var geocodeBaseURL = "https://maps.googleapis.com/maps/api/geocode/json?place_id="; 
 var mapsApiKey = "&key=AIzaSyAnBhiFh5vRGwz9cQ9eBX2lhFszC_e1jrA";
 //https://maps.googleapis.com/maps/api/place/autocomplete/output?parameters
