@@ -5,8 +5,8 @@ body {
 }
 #everything{
   padding-bottom: 100px;
-  padding-right: 40px;
-  padding-left: 40px;
+  padding-right: 50px;
+  padding-left: 50px;
 }
 .jumbotron {
   background: url("../images/networking.jpg");
@@ -15,7 +15,7 @@ body {
   color: white;
   font-family: 'Share Tech Mono', monospace;
 }
-#p-search, #p-results{
+#p-search, #p-results, #p-add-expert{
   font-weight: 700;
   font-size: 28px;
 }
@@ -29,7 +29,7 @@ body {
 p, span{/*fonts*/
   font-family: 'Roboto', sans-serif;
 }
-#header, #searchBar, #mainContent{
+#header, #searchBar, #mainContent, #expertInput{
   margin-bottom: 10px;
 }
 #sideSection{
@@ -89,15 +89,16 @@ p{
 #label-select{
   width: 30%;
 }
-#label-location{
+#label-text-input{
   width: 30%;
   float: left;
 }
-#search-select{
+#trade-select{
   width: 50%;
   height: 30px;
+  max-width: 400px;
 }
-#search-location{
+.text-input{
   height: 30px;
   width: 50%;
   border: 1px solid #7f7f7f;
@@ -106,9 +107,15 @@ p{
 #back-to-home{
   float:right;
 }
-#searchBtn, #makeProfile{
+#searchBtn, #makeProfile, #addProfile{
   width: 30%;
   min-width: 170px;
+}
+#go-home{
+  width: 150px;
+}
+#go-home-btn{
+  width: 100%; /* 150px */
 }
 #profile-header, #maps-header, #jobs-header{
   padding: 0px;
@@ -122,6 +129,7 @@ p{
 }
 #footer{
   border-radius: 0px;
+  border-top: 1px solid #b2b2b2;
 }
 #p-footer{
   font-weight: 500;
