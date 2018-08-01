@@ -47,7 +47,7 @@ Database were used for backend development.
   * Firebase Database
 
 ### Link to site - 
-   * https://github.com/hmalle/NovEx 
+   * https://hmalle.github.io/NovEx
 
 
  Challenges & Future Fixes Needed - 
