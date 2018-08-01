@@ -205,18 +205,21 @@ $(document).ready(function() {
                     "https://lifewithouttaffy.com/taffy/blog/wp-content/uploads/2012/09/a-guy.jpg",
                     "https://qph.fs.quoracdn.net/main-qimg-b64625fb234eb03e9a0e650195d08fad-c"];
     var selector = Math.floor(Math.random()*5);
-    $("#profiles").append("<div class='card' id='prof'>"+
-      "<div class='card-body'>" +
-        "<div class='col-sm-4 float-left'>" + 
-          "<img id='bioImg' src='"+pic_arr[selector]+"'>" +
+    $("#profiles").append(
+      "<div class='card' id='each-profile'>"+
+        "<div class='card-body container-fluid'>" +
+          "<div id='image-section'>" + 
+            "<img id='profile-image' src='"+pic_arr[selector]+"'>" +
+          "</div>"+
+          "<div id='profile-description'>"+
+            "<p><strong>Name:</strong>   "+prof.name+"</p>"+
+            "<p><strong>Trade:</strong>  "+prof.trade +"</p>" +
+            "<p><strong>Contact:</strong> "+prof.contact+"</p>"+
+            "<p><strong>Bio:</strong>    "+prof.bio +"</p></div>" +
+          "</div>"+
         "</div>"+
-        "<div class='col-sm-8 float-right mt-5'>"+
-          "<p>Name:   "+prof.name+"</p>"+
-          "<p>Trade:  "+prof.trade +"</p>" +
-          "<p>Contact: "+prof.contact+"</p>"+
-          "<p>Bio:    "+prof.bio +"</p></div>" +
-        "</div>"+
-      "</div>");
+      "</div>"
+    );
   }
 
   function displayJobs (tradeTitle, coordinates){

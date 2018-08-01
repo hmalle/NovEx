@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
 <head>
@@ -13,43 +14,37 @@
 
 <body>
   <!-- Jumbotron Heading -->
-
   <div id="header">
     <div class="jumbotron">
-        <h1 class="display-1"><strong>noVex</strong> </h1>
-        <p>Connecting Novices with Experts</p>
-        <p> </p>
+      <h1 class="display-3"><strong>noVex</strong> </h1>
+      <p>Connecting Novices with Experts</p>
     </div>
   </div><!--end of header-->
 
   <!-- Start of Search Bar -->
-  <div class="container container-fluid everything">
-    <div class="row" id="searchBar">
+  <div class="container-fluid" id="everything">
 
+    <div class="row" id="searchBar">
       <div class="col-lg-12" style="padding: 0px;">
         <div class="card">
-          <div class="card-header">
-            Search
-          </div>
+          <div class="card-header"> <p id="p-search">Search</p></div>
           <div class="card-body">
             <div class="row">
-              <div class="col-md-6 float-left" id="novice">
+              <div class="col-md-6 float-left" id="search-left">
                 <form>
                   <div class="form-group">
-                    <label for="tradeSearch">Select Trade</label>
-                    <form> <!--<form action="/action_page.php"> -->
-                      <select name="trade" id="tradeSearch">
-                        <option value="html">HTML</option>
-                        <option value="css">CSS</option>
-                        <option value="python">Python</option>
-                        <option value="javascript">Javascript</option>
-                        <option value="ruby">Ruby</option>
-                      </select>
-                    </form>
+                    <label id="label-select" for="trade-select">Select Trade</label>
+                    <select name="trade" id="trade-select">
+                      <option value="html">HTML</option>
+                      <option value="css">CSS</option>
+                      <option value="python">Python</option>
+                      <option value="javascript">Javascript</option>
+                      <option value="ruby">Ruby</option>
+                    </select>
                   </div>
-                  <div class="form-group form-inline">
-                    <label for="loc">Location</label>
-                    <input class="form-control" id="loc" type="text" placeholder="Enter City">
+                  <div class="form-group">
+                    <label id="label-text-input" for="text-input">Location</label>
+                    <input class="form-control text-input" type="text" placeholder="Enter City">
                   </div>
                 </form>
                 <button class="btn btn-primary" id="searchBtn">Search Experts</button>
@@ -59,7 +54,7 @@
                 <p>Need an extra hand working on a personal project?</p>
                 <p>Make a profile today and take on an apprentice of your own!</p>
                 <a href="profile.html">
-                  <button type="button" class="btn btn-primary" id="makeProfile">Create Profile</button>
+                  <button class="btn btn-primary" id="makeProfile">Create Profile</button>
                 </a>
               </div>
             </div>
@@ -70,48 +65,26 @@
 
     <div class="row" id="mainContent">
       <div class="card" id="mainContentCard">
-        <div class="card-header">
-          <h2>Results</h2>
-        </div>
-        <div class="card-body" id="results">
-          <div class="col-lg-12" >
+        <div class="card-header"> <p id="p-results">Results</p> </div>
+        <div class="card-body" id="profile-results">
+          <div class="col-lg-7 float-left" >
             <div class="card">
-              <div class="card-header">
-                <h2>Profiles</h2>
-              </div>
-              <div class="card-body" id="containProfiles">
-                <div class="col-lg-12" id="profiles"></div>
+              <div class="card-header" id="profile-header"> <p id="p-profiles">Profiles</p> </div>
+              <div class="card-body" id="profiles">
               </div>
             </div> <!-- end of card-->
           </div> <!--end of profiles-->
 
-          <div class="col-lg-12" id="sideSection">
-            <!--google map section -->
-            <div>
-              <div class="card googleMapsCard">
-                <div class=card-header><h2>Maps</h2></div>
-                <div class="card-body" id="map">
-                <!--
-                  <p>Integer rutrum neque mi, ut ultricies nulla finibus eget. Nullam ipsum urna, dignissim 
-                    quis lacinia faucibus, euismod id augue. Donec sagittis ac quam id rhoncus. Fusce 
-                    fringilla consectetur tristique. Duis tincidunt libero eu porta interdum. Praesent a 
-                    elementum mi, nec sollicitudin ex. Donec vel pulvinar diam. Mauris accumsan vitae ligula
-                    quis dignissim. Sed vel nibh ut libero malesuada commodo vitae sed nibh. Nullam ac urna 
-                    tortor. Morbi gravida leo ut tortor semper suscipit. Integer quis velit pharetra, 
-                    pulvinar velit id, fermentum odio. In eu porttitor erat.
-                  </p>
-                -->
-                </div> <!-- end of card body-->
-              </div> <!--end of card-->
-            </div><!--end of google maps section -->
-            <!-- stat section -->
-            <div>
-              <div class="card ">
-                <div class="card-header"><h2>Jobs that use your new skill</h2></div>
-                <div class="card-body" id="jobs">
-                </div>
-              </div><!--end of card body for Indeed stats-->
-            </div>
+          <div class="col-lg-5 float-right" id="sideSection">
+            <div class="card">
+              <div class="card-header" id="maps-header"><p id="p-maps">Maps</p></div>
+              <div class="card-body" id="map"> </div>
+            </div> <!--end of card-->
+            <div class="card">
+              <div class="card-header" id="jobs-header"><p id="p-jobs">Jobs that use your new skill</p></div>
+              <div class="card-body" id="jobs"> </div>
+            </div><!--end of card body for Indeed stats-->
+
           </div>
         </div><!--end of results-->
       </div><!-- end of card containing results-->
@@ -119,13 +92,9 @@
   </div> <!--end of container everything-->
 
   <footer class="footer fixed-bottom">
-    <div class="row">
-      <div class="col-md-12" style="padding: 10px 0 0 0;">
-        <div class="card" >
-          <div class="card-body text-center">
-            <p> &copy;Copyright 2018 </p>
-          </div>
-        </div>
+    <div class="card" id="footer" >
+      <div class="card-body text-center">
+        <p id="p-footer"> &copy;Copyright 2018 </p>
       </div>
     </div> <!-- end of footer -->
   </footer>
