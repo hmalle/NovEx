@@ -1,5 +1,6 @@
 
-# NoVex - Connecting Novices with Experts in the coding world. 
+# NoVex 
+#####Connecting Novices with Experts in the coding world. 
 ---
 ### Motivation 
 It is difficult for novices to start out in the coding world. It can be tricky navigating the 
