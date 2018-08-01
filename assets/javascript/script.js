@@ -54,8 +54,8 @@ $(document).ready(function() {
     },function(errorObject){ console.log("Errors handled: "+errorObject.code); });
   }
 
-	$("#add-profile").on("click", function(event){
-	  // Prevents the page from reloading on click
+  $("#add-profile").on("click", function(event){
+    // Prevents the page from reloading on click
     event.preventDefault();
     var expertName = $("#name").val().trim();
     var expertLoc ;
@@ -188,7 +188,7 @@ $(document).ready(function() {
           }
         }
       });
-    },function(errorObject){ console.log("Errors handled: "+errorObject.code); });
+    },function(err){ console.log("Errors handled: "+err.code); });
   }
 
   function clearMarkers(){
@@ -200,9 +200,9 @@ $(document).ready(function() {
 
   function displayProfile(prof){
     var pic_arr = ["http://donnabertaccini.com/wp-content/uploads/sites/2/2017/09/dmb-passport.jpg",
-                    "http://photos1.blogger.com/blogger/6971/3344/1600/11.0.jpg",
+                    "https://photos1.blogger.com/blogger/6971/3344/1600/11.0.jpg",
                     "https://upload.wikimedia.org/wikipedia/commons/7/76/Russian_passport_photo.JPG",
-                    "http://lifewithouttaffy.com/taffy/blog/wp-content/uploads/2012/09/a-guy.jpg",
+                    "https://lifewithouttaffy.com/taffy/blog/wp-content/uploads/2012/09/a-guy.jpg",
                     "https://qph.fs.quoracdn.net/main-qimg-b64625fb234eb03e9a0e650195d08fad-c"];
     var selector = Math.floor(Math.random()*5);
     $("#profiles").append("<div class='card' id='prof'>"+
@@ -247,3 +247,4 @@ $(document).ready(function() {
   };  
 
 });
+
