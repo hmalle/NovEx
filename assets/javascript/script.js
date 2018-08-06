@@ -12,18 +12,18 @@ $(document).ready(function() {
   }
 
   $(".profileMap").hide();
-	// Initialize Firebase
-	var config = {
-  	apiKey: "AIzaSyCXKNHRqS-OvGJ7ClQvWaJyf62CNlzzxkE",
-  	authDomain: "novex-17441.firebaseapp.com",
-  	databaseURL: "https://novex-17441.firebaseio.com",
-  	projectId: "novex-17441",
-  	storageBucket: "novex-17441.appspot.com",
-  	messagingSenderId: "748623444399"
-	};
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCXKNHRqS-OvGJ7ClQvWaJyf62CNlzzxkE",
+    authDomain: "novex-17441.firebaseapp.com",
+    databaseURL: "https://novex-17441.firebaseio.com",
+    projectId: "novex-17441",
+    storageBucket: "novex-17441.appspot.com",
+    messagingSenderId: "748623444399"
+  };
 
-	firebase.initializeApp(config);
-	var database = firebase.database();
+  firebase.initializeApp(config);
+  var database = firebase.database();
   setTimeout(function(){
     console.log("Initializing maps");
     initMap();
@@ -152,7 +152,6 @@ $(document).ready(function() {
 
   //---------------------------------------------------------------------------------- 
   function findExperts (tradeTitle, coordinates){
-    //a function to match the tradeTitle and available experts in te specified region(coordinates)
     var experts;
     //clear all markers off the map!!!
     google.maps.Map.prototype.clearOverlays = function() {

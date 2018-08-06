@@ -23,6 +23,9 @@ body {
   font-weight: 600;
   font-size: 25px;
 }
+.card-header{
+  
+}
 #tradeSearch{
   width: 50%;
 }
